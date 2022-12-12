@@ -30,7 +30,7 @@
         <script>
           document.write(new Date().getFullYear())
         </script>, made with <i class='material-icons'>favorite</i> by
-        <a href='https://www.facebook.com/namhong1412' target='_blank'>Nguyễn Nam Hồng</a>.
+        <a href='https://www.facebook.com/namhong1412' target='_blank'>K64A3 pro vjp</a>.
       </div>
     </div>
   </footer>";
