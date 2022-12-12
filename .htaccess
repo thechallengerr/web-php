@@ -1,0 +1,5 @@
+RewriteEngine on
+Options +FollowSymlinks
+# Options -Indexes
+RewriteBase /
+RewriteRule ^post/([a-zA-Z\.\-\_0-9]+)-([0-9]+).html$ post.php?title=$1&id=$2 [L]
