@@ -7,6 +7,6 @@
 	<title>Document</title>
 </head>
 <body>
-	
+	<?php echo "tôi có: " . $tien ?>
 </body>
 </html>
