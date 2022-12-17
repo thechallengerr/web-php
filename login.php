@@ -11,7 +11,7 @@
 <body>
 <!-- ------------------------------------php------------------------------------------------------ -->
 
-<?php
+<!-- <?php
     session_start();
     $username = $password = '';
     $errors = array('username' => '', 'password' => '');
@@ -31,7 +31,7 @@
         //     echo "Wrong username/password combination";
         // }
     }
-?>
+?> -->
     <!-- login by bootstrap  -->
     <div class="container mt-5">
         <div class="row">
@@ -40,11 +40,26 @@
                     <h3 class="text-center">Đăng nhập</h3>
                     <div class="form-group">
                         <label for="username">Người dùng</label>
-                        <input type="text" name="username" value="<?php echo $username ?>" class="form-control form-control-lg">
+                        <input class="form-control form-control-lg" type="text" name="username" class="input-label" placeholder="" autofocus value="<?php echo isset($_POST["username"]) ? $_POST["username"] : ''; ?>" >
+                    </div>
+                    <div class="">
+                        <label style="color: red">
+                            <?php 
+                            echo $error["login_id"];
+                            echo $err_login;
+                            ?>
+                        </label>
                     </div>
                     <div class="form-group">
                         <label for="password">Mật khẩu</label>
-                        <input type="password" name="password" value="<?php echo $password ?>" class="form-control form-control-lg">
+                        <input class="form-control form-control-lg" type="password" name="password" class="input-label" value="<?php echo isset($_POST["password"]) ? $_POST["password"] : ''; ?>">
+                    </div>
+                    <div class="">
+                        <label style="color: red">
+                            <?php 
+                            echo $error["password"];
+                            ?>
+                        </label>
                     </div>
                     <!-- forget password -->
                     <div class="form-group">
