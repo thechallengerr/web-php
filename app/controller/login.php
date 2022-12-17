@@ -1,14 +1,11 @@
 <?php
-
-// chú viết các xử lý logic thuần back-end ở đây
-//.....
-//.....
-
-
-// sau đó chú có thể đẩy các biến đó để render sang bên view
-// VD:
-// $tien = "10,000Đ";
 session_start();
+// include '../controller/common.php'; // common kiem tra session
+include '../common/database.php'; // database kết nối -> bắt buộc mọi controller phải có dòng này
+include '../model/admin.php'; // model -> lựa chọn model phù hợp
+
+
+
     $login_id = $password = '';
 
     $errors = array('login_id' => '', 'password' => '');
@@ -29,18 +26,8 @@ session_start();
             $password = $_POST['password'];
         }
         // if there are no errors, save to database
-        if ($status_login) {
-
-            // connect to the database
-            $db = mysqli_connect('localhost', 'root', '', 'quanlythoikhoabieu');
-            if (!$db) {
-                die("Connection failed: " . mysqli_connect_error());
-            }
-            $sql = "SELECT * FROM admins WHERE login_id = '$login_id' AND password = '$password'";
-            $result = $db -> query($sql);
-            $row = $result->fetch_array(MYSQLI_ASSOC);
-
-            $admin = $this->model->get_admins($login_id, $password);
+        if ($status_login == true) {
+            $$admin = get_admins($login_id, $password);
             if(!empty($admin)){
                 $_SESSION['user']['login_id'] = $login_id;
                 $_SESSION['success'] = "You are now logged in";
@@ -51,5 +38,6 @@ session_start();
         }
     }
 
-include 'app/views/login.php'
+
+include '../views/login.php' // view
 ?>
