@@ -1,13 +1,16 @@
 <?php
-
-// chú viết các xử lý logic thuần back-end ở đây
-//.....
-//.....
+include 'app/common/database.php';
+include 'app/model/admin.php';
 
 
-// sau đó chú có thể đẩy các biến đó để render sang bên view
-// VD:
-$tien = "10,000Đ";
+$result = get_admins('hieu1k23', '123456');
+
+if ($result) {
+    echo 'Tồn tại tài khoản này';
+}
+else {
+    echo 'Không có tài khoản này';
+}
 
 include 'app/views/login.php'
 ?>
