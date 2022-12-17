@@ -1,79 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <title>Login</title>
-        
-</head>
-<body>
-<!-- ------------------------------------php------------------------------------------------------ -->
+<?php
 
-<!-- <?php
-    session_start();
-    $username = $password = '';
-    $errors = array('username' => '', 'password' => '');
-    if (isset($_POST['submit'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        // $db = mysqli_connect('localhost', 'root', '', 'quanlythoikhoabieu');
-        // $sql = "SELECT * FROM user WHERE login_id = '$username' AND password = '$password'";
-        echo $username;
-        echo $password;
-        // $result = mysqli_query($db, $sql);
-        // if (mysqli_num_rows($result) == 1) {
-        //     $_SESSION['user']['username'] = $username;
-        //     $_SESSION['success'] = "You are now logged in";
-        //     header('location: index.php');
-        // } else {
-        //     echo "Wrong username/password combination";
-        // }
+// chú viết các xử lý logic thuần back-end ở đây
+//.....
+//.....
+
+
+// sau đó chú có thể đẩy các biến đó để render sang bên view
+// VD:
+// $tien = "10,000Đ";
+session_start();
+    $login_id = $password = '';
+
+    $errors = array('login_id' => '', 'password' => '');
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $status_login = true; // biến kiểm tra đăng nhập
+        // check login_id
+        if (empty($_POST['login_id'])) {
+            $errors['login_id'] = 'Hãy nhập tên đăng nhập <br />';
+            $status_login = false;
+        } else {
+            $login_id = $_POST['login_id'];
+        }
+        // check password
+        if (empty($_POST['password'])) {
+            $errors['password'] = 'Hãy nhập mật khẩu <br />';
+            $status_login = false;
+        } else {
+            $password = $_POST['password'];
+        }
+        // if there are no errors, save to database
+        if ($status_login == true) {
+            // connect to the database
+            $db = mysqli_connect('localhost', 'root', '', 'quanlythoikhoabieu');
+            if (!$db) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+            $sql = "SELECT * FROM admins WHERE login_id = '$login_id' AND password = '$password'";
+            $result = $db -> query($sql);
+            $row = $result->fetch_array(MYSQLI_ASSOC);
+            if($row){
+                $_SESSION['user']['login_id'] = $login_id;
+                $_SESSION['success'] = "You are now logged in";
+                header('location: ./app/views/home.php');
+            }else{
+                $errors['password'] = 'Tên đăng nhập hoặc mật khẩu không đúng';
+            }
+        }
     }
-?> -->
-    <!-- login by bootstrap  -->
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-4 offset-md-4 form-div login">
-                <form action="login.php" method="post">
-                    <h3 class="text-center">Đăng nhập</h3>
-                    <div class="form-group">
-                        <label for="username">Người dùng</label>
-                        <input class="form-control form-control-lg" type="text" name="username" class="input-label" placeholder="" autofocus value="<?php echo isset($_POST["username"]) ? $_POST["username"] : ''; ?>" >
-                    </div>
-                    <div class="">
-                        <label style="color: red">
-                            <?php 
-                            echo $error["login_id"];
-                            echo $err_login;
-                            ?>
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Mật khẩu</label>
-                        <input class="form-control form-control-lg" type="password" name="password" class="input-label" value="<?php echo isset($_POST["password"]) ? $_POST["password"] : ''; ?>">
-                    </div>
-                    <div class="">
-                        <label style="color: red">
-                            <?php 
-                            echo $error["password"];
-                            ?>
-                        </label>
-                    </div>
-                    <!-- forget password -->
-                    <div class="form-group">
-                        <a href="" class="float-right">Quên mật khẩu</a>
-                    <div class="form-group">
-                        <button type="submit" name="submit" class="btn btn-primary btn-block btn-lg">Đăng nhập</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    
-                
-    
 
-</body>
-</html>
+include 'app/views/login.php'
+?>
