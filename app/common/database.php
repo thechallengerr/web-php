@@ -1,7 +1,5 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$dbname = "mat_ong";
-
-$connection = new mysqli($host, $user, $pass, $dbname);
+const host = "localhost";
+const user = "root";
+const pass = "root";
+const dbname = "manage_schedule";

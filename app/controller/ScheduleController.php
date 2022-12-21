@@ -1,7 +1,6 @@
 <?php
-include '../controller/common.php';
+// include '../controller/common.php';
 include_once "../model/schedule.php";
-// include_once "../views/schedule_search.php";
 $schedule = new schedule();
 if (isset($_POST['deleteSchedule'])){
     var_dump(1);
