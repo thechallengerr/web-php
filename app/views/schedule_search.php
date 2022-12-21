@@ -57,7 +57,7 @@ if (isset($_SESSION['scheduleResult'])) {
                 </form>
 
             </div>
-            <?php echo (isset($scheduleResult)) ? "<div class='scheduleResult'>Số bản ghi tìm thấy: <span class='searchResult'> {{ count($scheduleResult)}}  </span></div>" : '' ?>
+            <?php echo (isset($scheduleResult)) ? "<div class='scheduleResult'>Số bản ghi tìm thấy: <span class='searchResult'> " . count($scheduleResult) . " </span></div>" : '' ?>
             <div class="scheduleData">
                 <table>
                     <thead>
@@ -91,10 +91,12 @@ if (isset($_SESSION['scheduleResult'])) {
                                 <td><?php echo $arrs['week_day'] ?></td>
                                 <td><?php echo $arrs['lession'] ?></td>
                                 <td>
-                                    <div class="manageOption d-flex">
-                                        <div class="manageOption--delete me-2"><button class="btn btn-primary" onclick="openToast()">Xoá</button></div>
-                                        <div class="manageOption--edit"><button class="btn btn-primary">Sửa</button></div>
-                                    </div>
+                                    <form action="" method="POST">
+                                        <div class="manageOption d-flex">
+                                            <div class="manageOption--delete me-2"><button class="btn btn-primary" onclick="openToast()" name="deleteSchedule" type="submit" value=<?php echo $arrs['id'] ?>>Xoá</button></div>
+                                            <div class="manageOption--edit"><button class="btn btn-primary">Sửa</button></div>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         <?php  }
@@ -106,18 +108,20 @@ if (isset($_SESSION['scheduleResult'])) {
         </div>
         <div class="ToastMsg" id="isToast">
             <div class="ToastMsg--wrap">
-                <div class="ToastMsg--title">
-                    <h5>Thông báo</h5>
-                </div>
-                <div class="ToastMsg--content">Bạn có muốn xoá thời khoá biểu?</div>
-                <div class="ToastMsg--btn">
-                    <div class="ToastMsg--btn__cancel">
-                        <button class="btn btn-primary" id="cancel">Cancel</button>
+                <form method="POST">
+                    <div class="ToastMsg--title">
+                        <h5>Thông báo</h5>
                     </div>
-                    <div class="ToastMsg--btn__confirm">
-                        <button class="btn btn-primary" id="confirm">OK</button>
+                    <div class="ToastMsg--content">Bạn có muốn xoá thời khoá biểu?</div>
+                    <div class="ToastMsg--btn">
+                        <div class="ToastMsg--btn__cancel">
+                            <button class="btn btn-primary" id="cancel">Cancel</button>
+                        </div>
+                        <div class="ToastMsg--btn__confirm">
+                            <button type="submit" class="btn btn-primary" name="confirm" id="confirm">OK</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

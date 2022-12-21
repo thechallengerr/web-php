@@ -1,9 +1,9 @@
 <?php 
 session_start();
-// include_once '../controller/database.php';
-// if (isset($_SESSION['username'])) {
+include_once '../controller/database.php';
+if (isset($_SESSION['username'])) {
 	
-// } else {
-// 	header('Location: /admin/login.php');
-// }
+} else {
+	header('Location: /admin/login.php');
+}
 ?>

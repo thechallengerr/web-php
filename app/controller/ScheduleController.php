@@ -3,6 +3,10 @@ include '../controller/common.php';
 include_once "../model/schedule.php";
 // include_once "../views/schedule_search.php";
 $schedule = new schedule();
+if (isset($_POST['deleteSchedule'])){
+    var_dump(1);
+    var_dump($_POST['deleteSchedule']);
+}
 if (isset($_POST['schedule_search'])) {
     $school_year = $_POST['school_year'];
     $subject_name = $_POST['subject_name'];
@@ -17,6 +21,7 @@ if (isset($_POST['schedule_search'])) {
     unset($_SESSION['scheduleResult']);
     include_once "../views/schedule_search.php";
 }
+
 // function render($file, $variable = [])
 // {
 //     include_once "../views/schedule_search.php";
