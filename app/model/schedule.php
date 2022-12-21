@@ -1,7 +1,7 @@
 <?php
 // connect db
 include_once "../common/database.php";
-
+var_dump($connection);
 class schedule
 {
     public $connection;
