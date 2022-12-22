@@ -1,3 +1,8 @@
+<?php
+include("../common/database.php");
+include("../common/define.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,11 +22,14 @@
                 <label class="col-sm-2" for="year">Khóa học</label>
                 <div class="col-sm-6">
 
-                    <select id="year" class="form-control">
+                    <select name="school_year" class="form-control">
                         <option>
                             <--- Chọn năm học --->
                         </option>
-                        <option>...</option>
+                        <option value="Năm 1">Năm 1</option>
+                        <option value="Năm 2">Năm 2</option>
+                        <option value="Năm 3">Năm 3</option>
+                        <option value="Năm 4">Năm 4</option>
                     </select>
                 </div>
             </div>
@@ -29,22 +37,34 @@
                 <label class="col-sm-2" for="subject">Môn học</label>
                 <div class="col-sm-6">
 
-                    <select id="subject" class="form-control">
+                    <select name="subject_id" id="subject" class="form-control">
                         <option selected>
                             <--- Chọn môn học --->
                         </option>
-                        <option>...</option>
+                        <?php
+                        if (isset($subjects)) {
+                            foreach ($subjects as $subject) {
+                                echo '<option value="' . $subject["id"] . '">' . $subject["name"] . '</option>';
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="teacher">Giáo viên</label>
                 <div class="col-sm-6">
-                    <select id="teacher" class="form-control">
+                    <select name="teacher_id" id="teacher" class="form-control">
                         <option selected>
                             <--- Chọn giáo viên --->
                         </option>
-                        <option>...</option>
+                        <?php
+                        if (isset($teachers)) {
+                            foreach ($teachers as $teacher) {
+                                echo '<option value="' . $teacher["id"] . '">' . $teacher["name"] . '</option>';
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
@@ -53,11 +73,17 @@
                 <label class="col-sm-2" for="weekday">Thứ</label>
                 <div class="col-sm-6">
 
-                    <select id="weekday" class="form-control">
+                    <select id="weekday" name="week_day" class="form-control">
                         <option selected>
                             <--- Chọn thứ --->
                         </option>
-                        <option>...</option>
+                        <option value="Thứ 2">Thứ 2</option>
+                        <option value="Thứ 3">Thứ 3</option>
+                        <option value="Thứ 4">Thứ 4</option>
+                        <option value="Thứ 5">Thứ 5</option>
+                        <option value="Thứ 6">Thứ 6</option>
+                        <option value="Thứ 7">Thứ 7</option>
+                        <option value="Chủ Nhật">Chủ Nhật</option>
                     </select>
                 </div>
             </div>
@@ -69,7 +95,7 @@
                     $lessions = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
                     foreach ($lessions as $lession) {
                         echo "<div class='form-check'>
-                                    <input class='form-check-input' type='checkbox' value='{$lession}' id='lession{$lession}'>
+                                    <input class='form-check-input' type='checkbox' value='{$lession}' id='lession{$lession}' name='lession'>
                                     <label class='form-check-label' for='lession{$lession}''>
                                     Tiết {$lession}
                                     </label>
@@ -83,11 +109,11 @@
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="note">Chú ý</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" id="note" rows="5"></textarea>
+                    <textarea class="form-control" id="notes" name="notes" rows="5"></textarea>
                 </div>
             </div>
             <div class="mt-5 d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5">Xác nhận</button>
+                <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5" name="confirm_edit">Xác nhận</button>
             </div>
         </form>
 
