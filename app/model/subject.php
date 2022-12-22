@@ -1,5 +1,5 @@
 <?php
-
+include_once "../common/database.php";
 // CRUD
 
 function add_subject($params) //CREAT
@@ -18,23 +18,23 @@ function get_all_subjects() //READ
 {
     global $connection;
 
-    $sql  = "SELECT * FROM `subjects`";
+    $sql  = "SELECT * FROM subjects";
 
     $result = $connection->query($sql);
-    $row = $result->fetch_array(MYSQLI_ASSOC);
+    $row = $result->fetch_assoc();
 
     return $row;
 }
 
-function get_some_subjects($params) //READ
+function get_some_subjects($school_year, $keyword) //READ
 {
     global $connection;
 
-    $sql  = "SELECT * FROM `subjects`
-            WHERE ... AND ...";
+    $sql  = "SELECT * FROM subjects WHERE subjects.school_year = '$school_year' 
+    AND (subjects.name LIKE '%$keyword%' OR subjects.description LIKE '%$keyword%')";
 
     $result = $connection->query($sql);
-    $row = $result->fetch_array(MYSQLI_ASSOC);
+    $row = $result->fetch_assoc();
 
     return $row;
 }
