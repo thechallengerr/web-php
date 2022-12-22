@@ -33,7 +33,7 @@ include ('../common/define.php');
                         <--- Chọn năm học--->
                     </option>
                     <?php
-                    $school_year = constant('SCHOOL_YEAR');
+                    $school_year = constant('YEAR');
                     print_r($school_year);
                     foreach ($school_year as $key => $value){
                     ?>
