@@ -17,7 +17,7 @@
     <div class="container">
         <div class="header d-flex justify-content-between">
             <div class="user_login d-flex flex-column" >
-                <label for="">Tên login: <span><?php if(isset($_SESSION['user'])){
+                <label for="">Tên login: <span><?php if(isset($_SESSION['user']['login_id'])){
                     echo $_SESSION['user']['login_id'];
                 } ?></span></label> 
                 <label for="">Thời gian login : <span><?php if(isset($_SESSION['timelogin'])){
