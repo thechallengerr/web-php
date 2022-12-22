@@ -1,11 +1,4 @@
-<?php
-if (isset($_SESSION['allSchedule'])) {
-    $allSchedule = $_SESSION['allSchedule'];
-}
-if (isset($_SESSION['scheduleResult'])) {
-    $scheduleResult = $_SESSION['scheduleResult'];
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,12 +84,12 @@ if (isset($_SESSION['scheduleResult'])) {
                                 <td><?php echo $arrs['week_day'] ?></td>
                                 <td><?php echo $arrs['lession'] ?></td>
                                 <td>
-                                    <form action="" method="POST">
-                                        <div class="manageOption d-flex">
-                                            <div class="manageOption--delete me-2"><button class="btn btn-primary" onclick="openToast()" name="deleteSchedule" type="submit" value=<?php echo $arrs['id'] ?>>Xoá</button></div>
-                                            <div class="manageOption--edit"><button class="btn btn-primary">Sửa</button></div>
-                                        </div>
-                                    </form>
+
+                                    <div class="manageOption d-flex">
+                                        <div class="manageOption--delete me-2"><button class="btn btn-primary" onclick="openToast()" name="deleteSchedule" type="submit" value=<?php echo $arrs['id'] ?>>Xoá</button></div>
+                                        <div class="manageOption--edit"><button class="btn btn-primary">Sửa</button></div>
+                                    </div>
+
                                 </td>
                             </tr>
                         <?php  }
