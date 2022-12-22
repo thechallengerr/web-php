@@ -14,7 +14,9 @@ function get_admins($login_id, $password) //READ
     global $connection;
 
     $sql  = "SELECT * FROM `admins` 
+
             WHERE login_id = '$login_id' AND password = '$password' AND actived_flag > 0";
+        
     $result = $connection->query($sql);
     $row = $result->fetch_array(MYSQLI_ASSOC);
 

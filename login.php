@@ -1,3 +1,7 @@
+<?php
+include './app/controller/login.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +12,6 @@
 	<title>Login</title>
 </head>
 <body>
-	<!-- <?php echo "tôi có: " . $tien ?> -->
 	<div class="container mt-5">
         <div class="row">
             <div class="col-md-4 offset-md-4 form-div login">
@@ -22,7 +25,6 @@
                         <label style="color: red">
                             <?php 
                             echo $errors['login_id'];
-                            // echo $err_login;
                             ?>
                         </label>
                     </div>
@@ -33,7 +35,6 @@
                     <div class="">
                         <label style="color: red">
                             <?php 
-                            // echo $error["password"];
 							echo $errors['password'];
                             ?>
                         </label>

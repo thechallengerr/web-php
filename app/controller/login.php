@@ -31,6 +31,7 @@ include '../model/admin.php'; // model -> lựa chọn model phù hợp
             if(!empty($admin)){
                 $_SESSION['user']['login_id'] = $login_id;
                 $_SESSION['success'] = "You are now logged in";
+                $_SESSION['timelogin'] = date("Y-m-d h:i:s");
                 header('location: ./app/views/home.php');
             }else{
                 $errors['password'] = 'Tên đăng nhập hoặc mật khẩu không đúng';
