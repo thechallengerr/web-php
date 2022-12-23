@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['success'] = "You are now logged in";
             date_default_timezone_set('Asia/Ho_Chi_Minh');
             $_SESSION['timelogin'] = date("Y-m-d h:i:s");
-            header('location: app/controller/homepage.php');
+            header('location: ./app/controller/homepage.php');
         }else{
             $errors['password'] = 'Tên đăng nhập hoặc mật khẩu không đúng';
         }
