@@ -1,13 +1,12 @@
 <?php
-session_start();
 // include '../controller/common.php'; // common kiem tra session
-include '../common/database.php'; // database kết nối -> bắt buộc mọi controller phải có dòng này
-include '../model/admin.php'; // model -> lựa chọn model phù hợp
+include (__DIR__.'/../common/database.php'); 
+include (__DIR__.'/../model/admin.php'); // model -> lựa chọn model phù hợp
+
 
 
 
     $login_id = $password = '';
-
     $errors = array('login_id' => '', 'password' => '');
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $status_login = true; // biến kiểm tra đăng nhập
@@ -32,7 +31,7 @@ include '../model/admin.php'; // model -> lựa chọn model phù hợp
                 $_SESSION['user']['login_id'] = $login_id;
                 $_SESSION['success'] = "You are now logged in";
                 $_SESSION['timelogin'] = date("Y-m-d h:i:s");
-                header('location: ./app/views/home.php');
+                header('location: ../../index.php');
             }else{
                 $errors['password'] = 'Tên đăng nhập hoặc mật khẩu không đúng';
             }
@@ -40,5 +39,5 @@ include '../model/admin.php'; // model -> lựa chọn model phù hợp
     }
 
 
-include '../views/login.php' // view
+include(__DIR__ . '/../../login.php'); // view
 ?>

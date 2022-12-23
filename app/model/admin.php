@@ -2,7 +2,7 @@
 
 // CRUD
 
-function add_admin() //CREAT
+function add_admin() //CREATE
 {
     global $connection;
 
