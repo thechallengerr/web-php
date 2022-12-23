@@ -19,7 +19,16 @@
                 } ?></span></label>
             </div>
             <div class="user_logout">
-                <a href="../../login.php">Đăng xuất</a>
+                <!-- logout in php -->
+                <?php
+                    if(isset($_POST['logout'])){
+                        $_SESSION['username'] = null;
+                        header('location: login.php');
+                    }
+                ?>
+                <form action="../../login.php" method="post">
+                    <button type="submit" name="logout" class="btn btn-danger">Đăng xuất</button>
+                </form>
             </div>
         </div>
         <br>
