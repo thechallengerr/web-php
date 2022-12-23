@@ -1,9 +1,3 @@
-<?php
-    session_start();
-    // if(!isset($_SESSION['user']['login_id'])){
-    //     header('Location: http://localhost/web_k64a3/FINAL-PHP/login.php');
-    // }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,15 +11,15 @@
     <div class="container">
         <div class="header d-flex justify-content-between">
             <div class="user_login d-flex flex-column" >
-                <label for="">Tên login: <span><?php if(isset($_SESSION['user']['login_id'])){
-                    echo $_SESSION['user']['login_id'];
+                <label for="">Tên login: <span><?php if(isset($_SESSION['username'])){
+                    echo $_SESSION['username'];
                 } ?></span></label> 
                 <label for="">Thời gian login : <span><?php if(isset($_SESSION['timelogin'])){
                     echo $_SESSION['timelogin'];
                 } ?></span></label>
             </div>
             <div class="user_logout">
-                <a href="http://localhost/web_k64a3/FINAL-PHP/login.php">Đăng xuất</a>
+                <a href="../../login.php">Đăng xuất</a>
             </div>
         </div>
         <br>
