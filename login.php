@@ -1,7 +1,3 @@
-<?php
-include './app/controller/login.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

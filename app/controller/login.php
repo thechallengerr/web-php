@@ -1,5 +1,5 @@
 <?php
-// include '../controller/common.php'; // common kiem tra session
+include __DIR__.'/common.php'; // common kiem tra session
 include (__DIR__.'/../common/database.php'); 
 include (__DIR__.'/../model/admin.php'); // model -> lựa chọn model phù hợp
 
