@@ -4,6 +4,11 @@ include '../common/database.php'; // database kết nối -> bắt buộc mọi 
 include '../model/admin.php'; // model -> lựa chọn model phù hợp
 
 # ko có logic gì cần xử lý
+# xử lí logout ở đây
+if(isset($_POST['logout'])){
+    unset($_SESSION['username']);
+    header('Location: ../../login.php');
+}
 
 include '../views/homepage.php' // view
 ?>

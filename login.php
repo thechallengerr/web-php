@@ -13,7 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $status_login = false;
     } else {
         $login_id = $_POST['login_id'];
-        echo $login_id;
     }
     // check password
     if (empty($_POST['password'])) {
