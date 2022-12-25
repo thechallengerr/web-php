@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <div class="header d-flex justify-content-between">
             <div class="user_login d-flex flex-column" >
                 <label for="">Tên login: <span><?php if(isset($_SESSION['username'])){
@@ -26,35 +26,41 @@
             </div>
         </div>
         <br>
-        <div class="content d-flex justify-content-around">
-            <div class="room">
+        <div class="card mt-5">
+            <div class="card-body">
+                <h4 class="card-title">Thời khóa biểu</h4>
+                <p class="card-text">Tra cứ thông tin về thời khóa biểu môn học</p>
+            </div>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">
                 <label for="">Phòng học</label>
                 <ul  style="list-style-type: none;">
-                    <a href=""><li>Tìm kiếm</li></a>
-                    <a href=""><li>Thêm mới</li></a>
+                    <a class="link-info" href=""><li>Tìm kiếm</li></a>
+                    <a class="link-success" href=""><li>Thêm mới</li></a>
                 </ul>
-            </div>
-            <div class="teacher">
+            </li>
+            <li class="list-group-item">
                 <label for="">Giảng viên</label>
                 <ul  style="list-style-type: none;">
-                    <a href=""><li>Tìm kiếm</li></a>
-                    <a href=""><li>Thêm mới</li></a>
+                    <a class="link-info" href=""><li>Tìm kiếm</li></a>
+                    <a class="link-success" href=""><li>Thêm mới</li></a>
                 </ul>
-            </div>
-            <div class="lesson">
+            </li>
+            <li class="list-group-item">
                 <label for="">Môn học</label>
                 <ul  style="list-style-type: none;">
-                    <a href=""><li>Tìm kiếm</li></a>
-                    <a href=""><li>Thêm mới</li></a>
+                    <a class="link-info" href=""><li>Tìm kiếm</li></a>
+                    <a class="link-success" href=""><li>Thêm mới</li></a>
                 </ul>
-            </div>
-            <div class="tkb">
+            </li>
+            <li class="list-group-item">
                 <label for="">Thời khóa biểu</label>
                 <ul  style="list-style-type: none;">
-                    <a href=""><li>Tìm kiếm</li></a>
-                    <a href=""><li>Thêm mới</li></a>
+                    <a class="link-info" href=""><li>Tìm kiếm</li></a>
+                    <a class="link-success" href=""><li>Thêm mới</li></a>
                 </ul>
-            </div>
+            </li>
+            </ul>
         </div>
     </div>
 </body>
