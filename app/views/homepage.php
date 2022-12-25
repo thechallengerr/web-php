@@ -33,13 +33,6 @@
             </div>
             <ul class="list-group list-group-flush">
             <li class="list-group-item">
-                <label for="">Phòng học</label>
-                <ul  style="list-style-type: none;">
-                    <a class="link-info" href=""><li>Tìm kiếm</li></a>
-                    <a class="link-success" href=""><li>Thêm mới</li></a>
-                </ul>
-            </li>
-            <li class="list-group-item">
                 <label for="">Giảng viên</label>
                 <ul  style="list-style-type: none;">
                     <a class="link-info" href=""><li>Tìm kiếm</li></a>
