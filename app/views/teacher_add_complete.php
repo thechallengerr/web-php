@@ -11,6 +11,10 @@
 </head>
 
 <body>
+
+    <?php
+    include '../common/navbar.php';
+    ?>
     <div class="container d-flex align-items-center justify-content-center flex-column mt-5">
         <h2 class="">Bạn đã đăng kí thành công giáo viên.</h2><br>
         <a href="/" class="text-black">Trở về trang chủ</a>

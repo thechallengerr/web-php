@@ -10,13 +10,17 @@
 </head>
 
 <body>
+
+    <?php
+    include '../common/navbar.php';
+    ?>
     <div class="container">
         <h1 class="text-center mt-5">Đăng kí giáo viên</h1>
         <form action="" method="post" class="mt-5 mb-5 border border-primary rounded p-5">
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="name">Họ và tên</label>
                 <div class="col-sm-6">
-                <input type="text" class="form-control" id="name" name="name">
+                    <input type="text" class="form-control" id="name" name="name">
                 </div>
             </div>
             <div class="form-group row mt-4">
@@ -50,7 +54,7 @@
                 <div class="col-sm-6">
                     <input type="file" id="file" name="file" class="form-control" accept="image/*">
                 </div>
-                
+
             </div>
 
 
