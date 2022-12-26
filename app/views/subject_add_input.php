@@ -1,6 +1,3 @@
-<?php
-include('../common/define.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,13 +16,15 @@ include('../common/define.php');
     ?>
     <div class="container">
         <h1 class="text-center my-3">Thêm mới môn học</h1>
-        <form action="" method="post" class="border border-primary rounded p-3">
+        <form enctype="multipart/form-data" action="subject_add_input.php" method="post" class="border border-primary rounded p-3">
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="year">Tên môn học</label>
                 <div class="col-sm-6">
+                    <input value="<?php echo $data['subject_name']; ?>" type="text" class="form-control" id="subject_name" name="subject_name">
 
-                    <input type="text" class="form-control" id="subject_name" name="subject_name" required>
-
+                    <span class="text-danger font-weight-bold">
+                        <b><?php echo $errorsMissing['subject_name']; ?></b>
+                    </span>
                 </div>
             </div>
             <div class="form-group row mt-4">
@@ -33,26 +32,33 @@ include('../common/define.php');
                 <div class="col-sm-6">
 
                     <select id="subject" class="form-control" name="school_year">
-                        <option selected>
-                            <--- Chọn năm học--->
+                        <option <?php empty($data['school_year']) ? "selected" : "" ?> value="">
+                            Chọn năm học
                         </option>
                         <?php
                         $school_year = constant('YEAR');
-                        print_r($school_year);
                         foreach ($school_year as $key => $value) {
+                            $selected = $key == intval($data['school_year']) ? "selected" : ""
                         ?>
-                            <option value="<?= $value ?>"><?= $value ?></option>
+                            <option <?php echo $selected; ?> value="<?= $key ?>"><?= $value ?></option>
                         <?php
                         }
                         ?>
                     </select>
+
+                    <span class="text-danger font-weight-bold">
+                        <b><?php echo $errorsMissing['school_year']; ?></b>
+                    </span>
                 </div>
             </div>
 
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="info">Mô tả </label>
                 <div class="col-sm-8">
-                    <textarea class="form-control" id="info" rows="5" name="note" required></textarea>
+                    <textarea class="form-control" id="info" rows="5" name="note"><?php echo $data['note']; ?></textarea>
+                    <span class="text-danger font-weight-bold">
+                        <b><?php echo $errorsMissing['note']; ?></b>
+                    </span>
                 </div>
             </div>
 
@@ -65,12 +71,19 @@ include('../common/define.php');
                         <input type="file" class="form-control" id="file" name="subject_image" border-width>
                         <!-- <label class="input-group-text" for="file">Browse</label> -->
                     </div>
+
+                    <span class="text-info font-weight-bold">
+                        <b><?php echo $data['subject_image']; ?></b>
+                    </span>
+                    <span class="text-danger font-weight-bold">
+                        <b><?php echo $errorsMissing['subject_image']; ?></b>
+                    </span>
                 </div>
 
             </div>
 
             <div class="mt-5 d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5">Xác nhận</button>
+                <button type="submit" name="add_subject" class="btn btn-primary btn-lg pe-5 ps-5">Xác nhận</button>
             </div>
 
 
