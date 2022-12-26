@@ -1,9 +1,8 @@
 <?php
-// include '../controller/common.php'; // common kiem tra session
+include '../controller/common.php'; // common kiem tra session
 include '../common/database.php'; // database kết nối -> bắt buộc mọi controller phải có dòng này
 include '../model/subject.php';
 include('../common/define.php');
-include '../controller/common.php'; // common kiem tra session
 $errorsMissing = array('school_year' => '', 'subject_name' => '', 'note' => '', 'subject_image' => '');
 $data = array('school_year' => '', 'subject_name' => '', 'note' => '', 'subject_image' => '');
 if (isset($_POST['add_subject'])) {
