@@ -17,7 +17,7 @@
      <div class="d-flex">
          <div class="user_logout">
              <!-- logout in php -->
-             <form action="" method="post">
+             <form action="logout.php" method="post">
                  <button type="submit" name="logout" class="btn btn-danger">Đăng xuất</button>
              </form>
          </div>

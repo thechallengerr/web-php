@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +11,10 @@
 </head>
 
 <body>
+
+    <?php
+    include '../common/navbar.php';
+    ?>
     <div class="container-fluid">
         <div class="scheduleSearch">
             <div class="scheduleForm">

@@ -1,3 +1,4 @@
+
 <?php 
 
 include '../common/database.php';
@@ -18,6 +19,5 @@ if (! isset($_POST['confirm_subject_app'])){
     }
 
 }
-
-
 ?>
+

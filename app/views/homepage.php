@@ -19,9 +19,9 @@
 </head>
 
 <body>
-   <?php 
+    <?php
     include '../common/navbar.php';
-   ?>
+    ?>
     <div class="container">
         <div class="card-body">
             <h2 class="card-title">Thời khóa biểu</h2>
@@ -50,7 +50,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item list-group-item-custom">
-                            <a href="">Tìm kiếm</a>
+                            <a href="subject_search_controller.php">Tìm kiếm</a>
                         </li>
                         <li class="list-group-item list-group-item-custom">
                             <a href="subject_add_input.php">Thêm mới</a>
@@ -65,10 +65,10 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item list-group-item-custom">
-                            <a href="">Tìm kiếm</a>
+                            <a href="ScheduleController.php">Tìm kiếm</a>
                         </li>
                         <li class="list-group-item list-group-item-custom">
-                            <a href="">Thêm mới</a>
+                            <a href="schedule_edit_input.php">Thêm mới</a>
                         </li>
                     </ul>
                 </div>
