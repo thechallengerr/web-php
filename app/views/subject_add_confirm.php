@@ -1,6 +1,3 @@
-<?php
-include ('../common/define.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,29 +10,33 @@ include ('../common/define.php');
 </head>
 
 <body>
+
+
+<?php
+include '../common/navbar.php';
+session_start();
+
+?>
 <div class="container">
-    <h1 class="text-center mt-5">Thêm mới môn học</h1>
-    <form action="" method="post" class="mt-5 mb-5 border border-primary rounded p-5">
+    <h1 class="text-center my-3">Xác nhận thêm mới môn học</h1>
+    <form action="../controller/subject_add_input.php" method="post" class="border border-primary rounded p-3">
         <div class="form-group row mt-4">
-            <label class="col-sm-2" for="year">Tên môn học</label>
+            <label class="col-sm-2" for="subject_name">Tên môn học</label>
             <div class="col-sm-6">
-
-                <input type="text" class="form-control" id="subject_name" name="subject_name" required>
-
+                <input class="form-control" id="subject_name" name="subject_name" value="<?= $_SESSION['subject_name'];?>" readonly>
             </div>
         </div>
         <div class="form-group row mt-4">
-            <label class="col-sm-2" for="subject">Khóa</label>
+            <label class="col-sm-2" for="school_year">Khóa</label>
             <div class="col-sm-6">
-
-
+                <input class="form-control" id="school_year" name="school_year" value="<?= $_SESSION['school_year'];?>" readonly>
             </div>
         </div>
 
         <div class="form-group row mt-4">
-            <label class="col-sm-2" for="info">Mô tả </label>
+            <label class="col-sm-2" for="subject_note">Mô tả </label>
             <div class="col-sm-8">
-                <textarea class="form-control" id="info" rows="5" name="note" required></textarea>
+                <textarea class="form-control" id="subject_note" rows="5" name="subject_note" readonly ><?=  $_SESSION['subject_note'];?></textarea>
             </div>
         </div>
 
@@ -44,22 +45,16 @@ include ('../common/define.php');
                 Avatar
             </label>
             <div class="col-sm-6">
-                <div class="input-group mb-3">
-                    <input type="file" class="form-control" id="file" name="subject_image" border-width>
-                    <!-- <label class="input-group-text" for="file">Browse</label> -->
-                </div>
+                <img style="height: 150px; width: 150px" src="../../assets/avatar/subject/<?= $_SESSION['subject_avatar']?>" alt="Avatar">
+                <input type="hidden" id="file" name="subject_avatar" value="<?= $_SESSION['subject_avatar']?>">
             </div>
-
         </div>
 
         <div class="mt-5 d-flex justify-content-around">
-            <button type="button" class="btn btn-primary btn-lg pe-5 ps-5">Sửa lại</button>
-            <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5">Đăng kí</button>
+            <a href="subject_add_input.php" class="btn btn-primary btn-lg pe-5 ps-5">Sửa lại</a>
+            <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5" name="confirm_subject_add">Đăng kí</button>
         </div>
-
-
     </form>
-
 </div>
 
 <!-- Bootstrap -->
@@ -67,4 +62,3 @@ include ('../common/define.php');
 </body>
 
 </html>
-

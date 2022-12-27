@@ -1,10 +1,23 @@
 <?php 
-// include '../controller/common.php'; // common kiem tra session
-include '../common/database.php'; // database kết nối -> bắt buộc mọi controller phải có dòng này
-include '../model/subject.php'; // model -> lựa chọn model phù hợp
-include '../controller/common.php'; // common kiem tra session
 
-// echo 10;
+include '../common/database.php';
+include '../model/subject.php';
+include '../controller/common.php';
 
-include '../views/subject_add_input.php'; // model -> lựa chọn model phù hợp
+if (! isset($_POST['confirm_subject_app'])){
+
+    $subject_name = $_POST['subject_name'];
+    $school_year = $_POST['school_year'];
+    $subject_note = $_POST['subject_note'];
+    $subject_avatar = $_POST['subject_avatar'];
+    if ( add_subject($subject_name, $school_year, $subject_note, $subject_avatar)) {
+        include '../views/subject_add_complete.php';
+    }
+    else{
+        include '../views/subject_add_input.php';
+    }
+
+}
+
+
 ?>
