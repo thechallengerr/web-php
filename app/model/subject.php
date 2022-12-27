@@ -2,16 +2,22 @@
 include_once "../common/database.php";
 // CRUD
 
-function add_subject($params) //CREAT
+/**
+ * @param $subject_name
+ * @param $school_year
+ * @param $subject_note
+ * @param $subject_avatar
+ * @return bool|mysqli_result
+ */
+function add_subject($subject_name, $school_year, $subject_note, $subject_avatar) //CREAT
 {
     global $connection;
 
-    $sql  = "INSERT INTO `subjects` 
-            ....";
-    /*
-    ....
-    */
-    return true;
+    $sql = "INSERT INTO subjects (name, avatar, description, school_year)
+VALUES ('{$subject_name}', '{$subject_avatar}', '{$subject_note}', '{$school_year}')";
+
+    $result = $connection->query($sql);
+    return $result;
 }
 
 function get_all_subjects() //READ

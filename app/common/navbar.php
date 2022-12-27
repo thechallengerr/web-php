@@ -11,7 +11,7 @@
      </div>
      <nav class="my-2 my-md-0 mr-md-3">
          <a class="p-2 text-dark" href="#">Giảng viên</a>
-         <a class="p-2 text-dark" href="#">Môn học</a>
+         <a class="p-2 text-dark" href="../views/subject_add_input.php">Môn học</a>
          <a class="p-2 text-dark" href="#">Thời khóa biểu</a>
      </nav>
      <div class="d-flex">
