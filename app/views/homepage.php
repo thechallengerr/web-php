@@ -38,7 +38,7 @@
                             <a href="">Tìm kiếm</a>
                         </li>
                         <li class="list-group-item list-group-item-custom">
-                            <a href="">Thêm mới</a>
+                            <a href="teacher_add_input.php">Thêm mới</a>
                         </li>
                     </ul>
                 </div>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <title>Đăng kí giáo viên</title>
+    <title>Thêm mới giáo viên</title>
 </head>
 
 <body>
@@ -15,35 +15,26 @@
     include '../common/navbar.php';
     ?>
     <div class="container">
-        <h1 class="text-center mt-5">Đăng kí giáo viên</h1>
-        <form action="" method="post" class="mt-5 mb-5 border border-primary rounded p-5">
+        <h1 class="text-center my-3">Xác nhận thêm mới giáo viên</h1>
+        <form action="teacher_add_confirm.php" method="post" class="border border-primary rounded p-3">
             <div class="form-group row mt-4">
-                <label class="col-sm-2" for="name">Họ và tên</label>
+                <label class="col-sm-2" for="teacher_name">Họ và tên</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="name" name="name">
+                    <?php echo $data['teacher_name']; ?>
                 </div>
             </div>
             <div class="form-group row mt-4">
-                <label class="col-sm-2" for="subject">Bộ môn</label>
+                <label class="col-sm-2" for="specialized">Bộ môn</label>
                 <div class="col-sm-6">
-
-                    <select id="subject" class="form-control">
-                        <option selected>
-                            <--- Chọn bộ môn --->
-                        </option>
-                        <option>...</option>
-                    </select>
+                    <?php $specialized = constant('SPECIALIZED');
+                    echo $specialized[$data['specialized']]; ?>
                 </div>
             </div>
             <div class="form-group row mt-4">
-                <label class="col-sm-2" for="hocvi">Học vị</label>
+                <label class="col-sm-2" for="degree">Học vị</label>
                 <div class="col-sm-6">
-                    <select id="hocvi" class="form-control">
-                        <option selected>
-                            <--- Chọn học vị --->
-                        </option>
-                        <option>...</option>
-                    </select>
+                    <?php $degree = constant('DEGREE');
+                    echo $degree[$data['degree']]; ?>
                 </div>
             </div>
 
@@ -52,21 +43,22 @@
                     Avatar
                 </label>
                 <div class="col-sm-6">
-                    <input type="file" id="file" name="file" class="form-control" accept="image/*">
+                    <img src="<?php echo $data['teacher_image'];?>" alt="" width="150" height="150">
                 </div>
 
             </div>
 
-
             <div class="form-group row mt-4">
-                <label class="col-sm-2" for="info">Mô tả thêm</label>
-                <div class="col-sm-10">
-                    <textarea class="form-control" id="info" rows="5"></textarea>
+                <label class="col-sm-2" for="info">Mô tả </label>
+                <div class="col-sm-8">
+                    <!-- <?php echo $data['note']; ?> -->
+                    <textarea class="form-control" id="info" rows="5" name="note" disabled><?php echo $data['note']; ?></textarea>
                 </div>
             </div>
             <div class="mt-5 d-flex justify-content-around">
-                <button type="button" class="btn btn-primary btn-lg pe-5 ps-5">Sửa lại</button>
-                <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5">Đăng kí</button>
+                <!-- <a href="teacher_add_input.php" class="btn btn-primary btn-lg pe-5 ps-5">Sửa lại</a> -->
+                <button type="submit" name="confirm_teacher_edit" class="btn btn-primary btn-lg pe-5 ps-5">Sửa lại</button>
+                <button type="submit" name="confirm_teacher" class="btn btn-primary btn-lg pe-5 ps-5">Đăng kí</button>
             </div>
         </form>
 

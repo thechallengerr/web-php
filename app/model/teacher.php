@@ -1,17 +1,17 @@
 <?php
+include_once "../common/database.php";
 
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 // CRUD
 
-function add_teacher($params) //CREAT
+
+function add_teacher($name, $specialized, $degree, $teacher_image, $note) //CREAT
 {
     global $connection;
-
-    $sql  = "INSERT INTO `teacher` 
-            ....";
-    /*
-    ....
-    */
-    return true;
+    $date = date("Y-m-d H:i:s");
+    $sql  = "INSERT INTO `teachers` (name, avatar, description, specialized, degree, created) VALUES('{$name}', '{$teacher_image}', '{$note}', '{$specialized}', '{$degree}', '{$date}')";
+    $result = $connection->query($sql);
+    return $result;
 }
 
 function get_all_teachers() //READ
@@ -62,5 +62,13 @@ function delete_teacher($params) //DELETE
     ....
     */
     return true;
+}
+
+function get_last_id(){
+    global $connection;
+
+    $last_id = $connection->insert_id;
+
+    return $last_id;
 }
 ?>
