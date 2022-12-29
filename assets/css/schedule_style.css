@@ -73,7 +73,7 @@ tr {
 
 /* css popup thông báo */
 #isToast {
-    display: none;
+    display: flex;
 }
 .ToastMsg {
     width: 100%;
