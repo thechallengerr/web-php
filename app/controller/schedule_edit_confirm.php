@@ -12,7 +12,7 @@ if (isset($_POST['confirm_edit'])) {
     $week_day = $_POST['week_day'];
     $lession = $_POST['lession'];
     $notes = $_POST['notes'];
-
+    edit_schedule($school_year, $subject_id, $teacher_id, $weekday, $lession, $notes);
     include_once "../views/schedule_edit_complete.php";
 } else {
     include_once "../views/schedule_edit_complete.php";
