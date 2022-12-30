@@ -77,13 +77,13 @@ function get_some_schedules($params) //READ
     return $row;
 }
 
-function edit_schedule($params) //UPDATE
+function edit_schedule($schedule_id,$school_year, $subject_id, $teacher_id, $weekday, $lession, $notes) //UPDATE
 {
     global $connection;
 
-    $sql = "UPDATE `schedules`
-            SET ...
-            WHERE ...";
+    $sql = $sql = "UPDATE `admins`
+    SET password = ''
+    WHERE schedule_id = '$schedule_id'";
     /*
     ....
     */
@@ -102,5 +102,3 @@ function delete_schedule($params) //DELETE
     */
     return true;
 }
-
-?>
