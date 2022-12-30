@@ -1,5 +1,5 @@
 <?php
-// include '../controller/common.php';
+include '../controller/common.php';
 include_once "../model/schedule.php";
 include_once '../common/database.php';
 if (isset($_POST['deleteSchedule'])) {
