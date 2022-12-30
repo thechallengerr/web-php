@@ -11,12 +11,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST['login_id'])) {
         $errors['login_id'] = 'Hãy nhập tên đăng nhập <br />';
         $status_login = false;
+    }elseif (strlen($_POST['login_id']) < 4) {
+        $errors['login_id'] = 'Tên đăng nhập phải có ít nhất 4 ký tự <br />';
+        $status_login = false;
     } else {
         $login_id = $_POST['login_id'];
     }
     // check password
     if (empty($_POST['password'])) {
         $errors['password'] = 'Hãy nhập mật khẩu <br />';
+        $status_login = false;
+    }elseif (strlen($_POST['password']) < 6) {
+        $errors['password'] = 'Mật khẩu phải có ít nhất 6 ký tự <br />';
         $status_login = false;
     } else {
         $password = $_POST['password'];
