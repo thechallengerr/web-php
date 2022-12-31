@@ -20,37 +20,27 @@
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="year">Khóa học</label>
                 <div class="col-sm-6">
-
-                    <select id="year" class="form-control">
-                        <option>
-                            <--- Chọn năm học --->
-                        </option>
-                        <option>...</option>
-                    </select>
+                    <?php
+                    echo '<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="' . $_SESSION['school_year'] . '">';
+                    ?>
                 </div>
             </div>
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="subject">Môn học</label>
                 <div class="col-sm-6">
 
-                    <select id="subject" class="form-control">
-                        <option selected>
-                            <--- Chọn môn học --->
-                        </option>
-                        <option>...</option>
-                    </select>
+                    <?php
+                    echo '<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="' . $_SESSION['school_year'] . '">';
+                    ?>
                 </div>
             </div>
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="teacher">Giáo viên</label>
                 <div class="col-sm-6">
 
-                    <select id="teacher" class="form-control">
-                        <option selected>
-                            <--- Chọn giáo viên --->
-                        </option>
-                        <option>...</option>
-                    </select>
+                    <?php
+                    echo '<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="' . $_SESSION['school_year'] . '">';
+                    ?>
                 </div>
             </div>
 
@@ -58,12 +48,9 @@
                 <label class="col-sm-2" for="weekday">Thứ</label>
                 <div class="col-sm-6">
 
-                    <select id="weekday" class="form-control">
-                        <option selected>
-                            <--- Chọn thứ --->
-                        </option>
-                        <option>...</option>
-                    </select>
+                    <?php
+                    echo '<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="' . $_SESSION['week_day'] . '">';
+                    ?>
                 </div>
             </div>
 
@@ -88,12 +75,14 @@
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="note">Chú ý</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" id="note" rows="5"></textarea>
+                    <?php
+                    echo '<textarea class="form-control" id="note" rows="5">' . $_SESSION['school_year'] . '</textarea>';
+                    ?>
                 </div>
             </div>
             <div class="mt-5 d-flex justify-content-around">
-                <button type="button" class="btn btn-primary btn-lg pe-5 ps-5">Sửa lại</button>
-                <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5">Sửa</button>
+                <button type="button" class="btn btn-primary btn-lg pe-5 ps-5" onclick="javascript:history.go(-1)">Sửa lại</button>
+                <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5" name="edit_schedule">Sửa</button>
             </div>
         </form>
 

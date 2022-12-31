@@ -32,7 +32,7 @@ include("../common/define.php");
                         </option>
                         <option value="Năm 1">Năm 1</option>
                         <option value="Năm 2">Năm 2</option>
-                        <option value="Năm 3">Năm 3</option>
+                        <option value="Năm 3" selected>Năm 3</option>
                         <option value="Năm 4">Năm 4</option>
                     </select>
                 </div>
