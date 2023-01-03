@@ -4,16 +4,35 @@ include '../common/database.php'; // database kết nối -> bắt buộc mọi 
 include '../model/teacher.php';
 include '../common/define.php';
 
+$teacher_name = '';
+$specialized = '';
+$degree = '';
+$note = '';
+$teacher_image = '';
+$edit = false;
+if (isset($_SESSION['teacher_name'])) {
+    $teacher_name = $_SESSION['teacher_name'];
+}
+if (isset($_SESSION['specialized'])) {
+    $specialized = $_SESSION['specialized'];
+}
+if (isset($_SESSION['degree'])) {
+    $degree = $_SESSION['degree'];
+}
+if (isset($_SESSION['note'])) {
+    $note = $_SESSION['note'];
+}
+if (isset($_SESSION['teacher_image']) ) {
+    $teacher_image = $_SESSION['teacher_image'];
+    $edit = true;
+}
+
 $errorsMissing = array('teacher_name' => '', 'specialized' => '','degree'=>'', 'note' => '', 'teacher_image' => '');
-$data = array('teacher_name' => '', 'specialized' => '','degree'=>'', 'note' => '', 'teacher_image' => '');
+$data = array('teacher_name' => $teacher_name, 'specialized' => $specialized,'degree'=>$degree, 'note' => $note, 'teacher_image' => $teacher_image);
 $allowedTypes = [
     'image/png' => 'png',
     'image/jpeg' => 'jpg'
 ];
-// if(!empty($_SESSION['teacher_name']) && !empty($_SESSION['specialized']) && !empty($_SESSION['degree']) && !empty($_SESSION['note']) && !empty($_SESSION['teacher_image'])) {
-//     $data = array('teacher_name' => $_SESSION['teacher_name'], 'specialized' => $_SESSION['specialized'],
-//     'degree'=>$_SESSION['degree'], 'note' => !empty($_SESSION['note']), 'teacher_image' => $_SESSION['teacher_image']);
-// }
 
 if (isset($_POST['add_teacher'])) {
     // kiem tra
@@ -41,9 +60,9 @@ if (isset($_POST['add_teacher'])) {
     }  else {
         $data['note'] = $_POST['note'];
     }
-    if (empty($_FILES['teacher_image']['name'])) {
+    if (empty($_FILES['teacher_image']['name']) && (!$edit || ($edit && empty($teacher_image)))) {
         $errorsMissing['teacher_image'] = "Hãy chọn avatar";
-    }else {
+    }elseif (!$edit || (!empty($_FILES['teacher_image']['name']) && $_FILES['teacher_image']['name']!==$teacher_image)) {
         $filepath = $_FILES['teacher_image']['tmp_name'];
         $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
         $filetype = finfo_file($fileinfo, $filepath);
@@ -62,7 +81,11 @@ if (isset($_POST['add_teacher'])) {
             $_POST['teacher_image'] = $name;
             $_POST['file_path'] = $target_file;
         }
+    }else{
+        $_POST['teacher_image'] = $teacher_image;
+        $_POST['file_path'] = $_SESSION['file_path'];
     }
+
     if (!empty($_POST['teacher_name']) && !empty($_POST['specialized']) && !empty($_POST['degree']) && !empty($_POST['note']) && !empty($_POST['teacher_image'])) {
         $_SESSION['teacher_name']=$_POST['teacher_name'];
         $_SESSION['specialized']=$_POST['specialized'];
@@ -70,6 +93,7 @@ if (isset($_POST['add_teacher'])) {
         $_SESSION['note']=$_POST['note'];
         $_SESSION['teacher_image']=$_POST['teacher_image'];
         $_SESSION['file_path']=$_POST['file_path'];
+        $_SESSION['files'] = $_FILES['teacher_image'];
         header('Location: ./teacher_add_confirm.php');
     }else{
         include '../views/teacher_add_input.php';
