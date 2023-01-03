@@ -20,52 +20,58 @@ include '../common/define.php';
     <h1 class="text-center my-3">Thêm mới môn học</h1>
     <form action="../controller/subject_add_input.php" method="post" enctype="multipart/form-data" class="border border-primary rounded p-3">
 
-        <?php
-        echo isset($error['subject_name_empty']) ? $error['subject_name_empty'] : '';
-        echo isset($error['subject_name_length']) ? $error['subject_name_length'] : '';
-        ?>
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="subject_name">Tên môn học</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="subject_name" name="subject_name" value="<?= isset($_SESSION['subject_name']) ? $_SESSION['subject_name'] : '';?>">
+                    <span class="text-danger font-weight-bold">
+                        <?php
+                        echo isset($error['subject_name_empty']) ? $error['subject_name_empty'] : '';
+                        echo isset($error['subject_name_length']) ? $error['subject_name_length'] : '';
+                        ?>
+                    </span>
                 </div>
             </div>
 
-            <?php
-            echo isset($error['school_year_empty']) ? $error['school_year_empty'] : '';
-            ?>
         <div class="form-group row mt-4">
             <label class="col-sm-2" for="school_year">Khóa</label>
             <div class="col-sm-6">
                 <select id="school_year" class="form-control" name="school_year">
-                    <option value="<?= isset($_SESSION['school_year']) ? $_SESSION['school_year'] : '';?>" selected="selected">
-                        <?= isset($_SESSION['school_year']) ? $_SESSION['school_year'] : '<--- Chọn năm học--->';?>
+                    <option <?php empty($_SESSION['school_year']) ? "selected" : "" ?> value="">
+                        <--- Chọn năm học--->
                     </option>
                     <?php
                     $school_year = constant('YEAR');
                     foreach ($school_year as $key => $value) {
-                        ?>
-                        <option value="<?= $value ?>"><?= $value ?></option>
+                        $selected = ($value == $_SESSION['school_year'] ? "selected" : "");
+                    ?>
+                        <option <?php echo $selected; ?> value="<?= $value ?>"><?= $value ?></option>
                         <?php
                     }
                     ?>
                 </select>
+                <span class="text-danger font-weight-bold">
+                    <?php
+                    echo isset($error['school_year_empty']) ? $error['school_year_empty'] : '';
+                    ?>
+                </span>
             </div>
         </div>
 
-            <?php
-            echo isset($error['subject_note_empty']) ? $error['subject_note_empty'] : '';
-            echo isset($error['subject_note_length']) ? $error['subject_note_length'] : '';
-            ?>
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="subject_note">Mô tả </label>
                 <div class="col-sm-8">
                     <textarea class="form-control" id="subject_note" rows="5" name="subject_note" ><?= isset($_SESSION['subject_note']) ? $_SESSION['subject_note'] : '';?></textarea>
+                    <span class="text-danger font-weight-bold">
+                        <?php
+                        echo isset($error['subject_note_empty']) ? $error['subject_note_empty'] : '';
+                        echo isset($error['subject_note_length']) ? $error['subject_note_length'] : '';
+                        ?>
+                    </span>
                 </div>
             </div>
 
             <?php
-            echo isset($error['subject_avatar_empty']) ? $error['subject_avatar_empty'] : '';
             if (isset($_SESSION['subject_avatar'])){
                 ?>
                 <div class="form-group row mt-4">
@@ -92,6 +98,11 @@ include '../common/define.php';
                         <div class="input-group mb-3">
                             <input type="file" class="form-control" id="file" name="subject_avatar" border-width ">
                         </div>
+                        <span class="text-danger font-weight-bold">
+                            <?php
+                            echo isset($error['subject_avatar_empty']) ? $error['subject_avatar_empty'] : '';
+                            ?>
+                        </span>
                     </div>
 
                 </div>
