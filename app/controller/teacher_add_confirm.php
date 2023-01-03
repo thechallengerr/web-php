@@ -16,7 +16,11 @@
     if (isset($_POST['confirm_teacher'])) {
         if (add_teacher($teacher_name, $specialized, $degree, $teacher_image, $note)){
             $id = get_last_id();
-            $target_dir = "../../assets/avatar/teacher/{$id}/";
+            $path = "../../assets/avatar/teacher/";
+            if (!file_exists($path)) {
+                mkdir($path, 0700);
+            }
+            $target_dir = $path."{$id}"."/";
             if (!file_exists($target_dir)) {
                 mkdir($target_dir, 0700);
             }
