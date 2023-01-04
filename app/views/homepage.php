@@ -50,7 +50,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item list-group-item-custom">
-                            <a href="subject_search_controller.php">Tìm kiếm</a>
+                            <a href="subject_search.php">Tìm kiếm</a>
                         </li>
                         <li class="list-group-item list-group-item-custom">
                             <a href="subject_add_input.php">Thêm mới</a>

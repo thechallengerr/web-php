@@ -24,10 +24,10 @@ function get_all_subjects() //READ
 {
     global $connection;
 
-    $sql  = "SELECT * FROM subjects";
+    $sql  = "SELECT * FROM subjects ORDER BY subjects.id DESC";
 
     $result = $connection->query($sql);
-    $row = $result->fetch_assoc();
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     return $row;
 }
@@ -37,10 +37,10 @@ function get_some_subjects($school_year, $keyword) //READ
     global $connection;
 
     $sql  = "SELECT * FROM subjects WHERE subjects.school_year = '$school_year' 
-    AND (subjects.name LIKE '%$keyword%' OR subjects.description LIKE '%$keyword%')";
+    AND (subjects.name LIKE '%$keyword%' OR subjects.description LIKE '%$keyword%') ORDER BY subjects.id DESC";
 
     $result = $connection->query($sql);
-    $row = $result->fetch_assoc();
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     return $row;
 }
@@ -57,14 +57,14 @@ function edit_subject($params) //UPDATE
     */
 }
 
-function delete_subject($params) //DELETE
+function delete_subject($id) //DELETE
 {
     global $connection;
 
-    $sql  = "DELETE FROM `subjects`
-            WHERE ...";
-    /*
-    ....
-    */
+    $sql  = "DELETE FROM subjects
+            WHERE subjects.id=$id";
+    $connection->query($sql);
+
+    return true;
 }
 ?>
