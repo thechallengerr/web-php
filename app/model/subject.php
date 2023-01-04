@@ -67,4 +67,12 @@ function delete_subject($id) //DELETE
 
     return true;
 }
+
+function get_last_subject_id(){
+    global $connection;
+
+    $last_id = $connection->insert_id;
+
+    return $last_id;
+}
 ?>
