@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <title>Sửa thời khoá biểu</title>
+    <title>Đăng kí giáo viên</title>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     include '../common/navbar.php';
     ?>
     <div class="container d-flex align-items-center justify-content-center flex-column mt-5">
-        <h2 class="">Đã cập nhật thành công thời khóa biểu</h2><br>
+        <h2 class="">Bạn đã sửa thông tin giáo viên thành côngss.</h2><br>
         <a href="/" class="text-black">Trở về trang chủ</a>
     </div>
     <!-- Bootstrap -->

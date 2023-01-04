@@ -5,7 +5,7 @@
 }
 body {
     width: 100%;
-    height: 100vh;
+    max-height: 100vh;
     font-size: 14px;
 }
 select {
@@ -14,7 +14,7 @@ select {
 }
 .container-fluid {
     width: 100%;
-    height: 100vh;
+    max-height: 100vh;
 }
 .scheduleSearch {
     padding: 16px 20px;
@@ -45,6 +45,10 @@ thead,
 tr {
     border: none;
 }
+.scheduleSearch .scheduleData {
+    overflow: auto;
+    height: calc(100vh - 340px);
+}
 .scheduleSearch .scheduleData table {
     width: 100%;
 }
@@ -52,6 +56,9 @@ tr {
     padding: 0;
     margin: 0;
     height: 40px;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
 }
 .scheduleSearch .scheduleData table tbody tr th {
     min-width: 50px;

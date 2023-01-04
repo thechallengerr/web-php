@@ -1,3 +1,6 @@
+<?php
+var_dump($GLOBALS['isToast'])
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +15,10 @@
 </head>
 
 <body>
+
+    <?php
+    include '../common/navbar.php';
+    ?>
     <div class="container-fluid">
         <div class="scheduleSearch">
             <div class="scheduleForm">
@@ -19,7 +26,7 @@
 
                     <div class="scheduleForm--wrap d-flex col-8">
                         <div class="scheduleForm--wrap__label col-4"><label for="">Khoá</label></div>
-                        <select name="school_year" id="" class="col-8">
+                        <select name="school_year" id="school_year" class="col-8">
                             <option value="Năm 1">Năm 1</option>
                             <option value="Năm 2">Năm 2</option>
                             <option value="Năm 3">Năm 3</option>
@@ -28,7 +35,7 @@
                     </div>
                     <div class="scheduleForm--wrap d-flex col-8">
                         <div class="scheduleForm--wrap__label col-4"><label for="">Môn học</label></div>
-                        <select name="subject_name" id="" class="col-8">
+                        <select name="subject_name" id="subject_name" class="col-8">
                             <option value="Toán">Toán</option>
                             <option value="Tiếng Việt">Tiếng Việt</option>
                             <option value="Giáo dục công dân">Giáo dục công dân</option>
@@ -101,7 +108,8 @@
                 </table>
             </div>
         </div>
-        <?php if (isset($isToast)) {
+        <?php
+        if (isset($isToast)) {
         ?>
             <div class="ToastMsg" id="isToast">
                 <div class="ToastMsg--wrap">
@@ -126,41 +134,27 @@
 
     </div>
     <script>
-        document.getElementById("cancel").addEventListener("click", function() {
-            document.getElementById("isToast").style.display = "none";
+        $(document).ready(function() {
+            const depart = $("#school_year").val();
+            const key = $("#subject_name").val();
+            $("#school_year").change(updateValue(event));
+            $("#subject_name").change(updateKeySearch(event));
+
+            function updateValue(e) {
+                console.log(e.target.val);
+                localStorage.setItem("value1", e.target.value);
+            }
+
+            function updateKeySearch(e) {
+                localStorage.setItem("value2", e.target.value)
+
+            }
+            document.body.onload = () => {
+                // $("#school_year").val() = localStorage.getItem("value1");
+                // $("#subject_name").val() = localStorage.getItem("value2");
+            }
+
         });
-
-        // $(".deleteSchedule").click(function() {
-        //     var textID = $(this).parent().parent().parent().parent().siblings()[0];
-        //     idDelete = $(textID).text();
-        //     $.post("../controller/ScheduleController.php", {
-        //         idDelete: idDelete
-        //     }, function(data) {
-        //         console.log(data);
-        //     });
-
-        // });
-
-        // function openToast() {
-        //     document.getElementById("isToast").style.display = "flex";
-        // }
-
-        // function SubmitFormData() {
-        //     var name = $("#name").val();
-        //     var email = $("#email").val();
-        //     var phone = $("#phone").val();
-        //     var gender = $("input[type=radio]:checked").val();
-        //     $.post("../controller/ScheduleController.php", {
-        //             name: name,
-        //             email: email,
-        //             phone: phone,
-        //             gender: gender
-        //         },
-        //         function(data) {
-        //             $('#results').html(data);
-        //             $('#myForm')[0].reset();
-        //         });
-        // }
     </script>
 </body>
 

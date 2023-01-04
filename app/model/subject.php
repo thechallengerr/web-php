@@ -1,40 +1,46 @@
 <?php
-
+include_once "../common/database.php";
 // CRUD
 
-function add_subject($params) //CREAT
+/**
+ * @param $subject_name
+ * @param $school_year
+ * @param $subject_note
+ * @param $subject_avatar
+ * @return bool|mysqli_result
+ */
+function add_subject($subject_name, $school_year, $subject_note, $subject_avatar) //CREAT
 {
     global $connection;
 
-    $sql  = "INSERT INTO `subjects` 
-            ....";
-    /*
-    ....
-    */
-    return true;
+    $sql = "INSERT INTO subjects (name, avatar, description, school_year)
+VALUES ('{$subject_name}', '{$subject_avatar}', '{$subject_note}', '{$school_year}')";
+
+    $result = $connection->query($sql);
+    return $result;
 }
 
 function get_all_subjects() //READ
 {
     global $connection;
 
-    $sql  = "SELECT * FROM `subjects`";
+    $sql  = "SELECT * FROM subjects";
 
     $result = $connection->query($sql);
-    $row = $result->fetch_array(MYSQLI_ASSOC);
+    $row = $result->fetch_assoc();
 
     return $row;
 }
 
-function get_some_subjects($params) //READ
+function get_some_subjects($school_year, $keyword) //READ
 {
     global $connection;
 
-    $sql  = "SELECT * FROM `subjects`
-            WHERE ... AND ...";
+    $sql  = "SELECT * FROM subjects WHERE subjects.school_year = '$school_year' 
+    AND (subjects.name LIKE '%$keyword%' OR subjects.description LIKE '%$keyword%')";
 
     $result = $connection->query($sql);
-    $row = $result->fetch_array(MYSQLI_ASSOC);
+    $row = $result->fetch_assoc();
 
     return $row;
 }

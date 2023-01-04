@@ -1,7 +1,7 @@
 <?php
 
 // connect db
-include_once "../common/database.php";
+include_once '../common/database.php';
 // tìm kiếm thời khoá biểu
 function scheduleSearch($school_year, $subject_name, $teacher_name)
 {
@@ -103,5 +103,3 @@ function delete_schedule($params) //DELETE
     */
     return true;
 }
-
-?>
