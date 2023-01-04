@@ -65,8 +65,8 @@ if (isset($_POST['submit_subject_add'])){
     if ( empty($checked_subject_avatar) ){
         /** ở form subject_add_confirm nếu ấn sửa lại thì sẽ quay lại trang này,
          * khi đó sẽ có thêm old_subject_avatar (ảnh người dùng đã submit)
-         * TH1: người dùng chọn ảnh mới -> sẽ thêm ảnh mới vào như bình thường
-         * TH2: người dùng không chọn ảnh mới -> dùng luôn ảnh old_subject_avatar
+         * TH1: người dùng không chọn ảnh mới -> dùng luôn ảnh old_subject_avatar
+         * TH2: người dùng chọn ảnh mới -> sẽ thêm ảnh mới vào như bình thường
          */
         if (empty($_POST['old_subject_avatar'])){
             $error['subject_avatar_empty'] = "Hãy chọn avatar";
@@ -76,16 +76,10 @@ if (isset($_POST['submit_subject_add'])){
         }
     }
     else {
-
-        // có ảnh mới thì xóa ảnh cũ đi
-        if (unlink("../../assets/avatar/tmp/".$_POST['old_subject_avatar'])){
-
-        }
         $files =  $_FILES['subject_avatar']['tmp_name'];
         $name = $_FILES['subject_avatar']['name'].date('YmdHis');
         $path = "../../assets/avatar/tmp/".$name;
         move_uploaded_file($files, $path);
-
         // kiểm tra có phải ảnh không, nếu không phải -> xóa + error
         if (! getimagesize("../../assets/avatar/tmp/".$name)) {
 
@@ -95,7 +89,13 @@ if (isset($_POST['submit_subject_add'])){
 
             }
 
-            $error['subject_avatar_empty'] = 'Hãy chọn avatar';
+            $error['subject_avatar_empty'] = 'Hãy chọn file png hoặc jpg';
+        }
+        else{
+            // có ảnh mới thì xóa ảnh cũ đi
+            if (unlink("../../assets/avatar/tmp/".$_POST['old_subject_avatar'])){
+
+            }
         }
     }
 
