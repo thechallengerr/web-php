@@ -95,8 +95,10 @@ include("../common/define.php");
                                             </div>
                                         </div>
                                     </div>
-
-                                    <button class="btn btn-primary">Sửa</button>
+                                    <form method="get">
+                                        <a href="subject_edit_input.php?edit_subject=<?php echo $row[$i]['id']; ?>"
+                                        class="btn btn-primary">Sửa</a>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
