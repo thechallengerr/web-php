@@ -5,8 +5,8 @@ include_once "../model/teacher.php";
 include_once "../model/subject.php";
 include_once '../common/database.php';
 
-// $teachers = get_all_teachers();
-// $subjects = get_all_subjects();
+$teachers = get_all_teachers();
+$subjects = get_all_subjects();
 if (isset($_POST['confirm_edit'])) {
     $_SESSION['schedule_id'] = 1;
     $_SESSION['school_year'] = $_POST['school_year'];

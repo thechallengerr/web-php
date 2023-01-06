@@ -14,6 +14,7 @@ if (isset($_POST['edit_schedule'])) {
     $lession = $_POST['lession'];
     $notes = $_POST['notes'];
     edit_schedule($schedule_id, $school_year, $subject_id, $teacher_id, $weekday, $lession, $notes);
+    session_destroy();
     include_once "../views/schedule_edit_complete.php";
 } else if (isset($_POST['edit_again'])) {
     include_once "../views/schedule_edit_input.php";
