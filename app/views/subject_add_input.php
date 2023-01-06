@@ -43,9 +43,9 @@ include '../common/define.php';
                     <?php
                     $school_year = constant('YEAR');
                     foreach ($school_year as $key => $value) {
-                        $selected = ($value == $_SESSION['school_year'] ? "selected" : "");
+                        $selected = ($key == $_SESSION['school_year'] ? "selected" : "");
                     ?>
-                        <option <?php echo $selected; ?> value="<?= $value ?>"><?= $value ?></option>
+                        <option <?php echo $selected; ?> value="<?= $key ?>"><?= $value ?></option>
                         <?php
                     }
                     ?>
