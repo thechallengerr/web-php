@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +23,7 @@
 
                     <div class="scheduleForm--wrap d-flex col-8">
                         <div class="scheduleForm--wrap__label col-4"><label for="">Khoá</label></div>
-                        <select name="school_year" id="" class="col-8">
+                        <select name="school_year" id="school_year" class="col-8">
                             <option value="Năm 1">Năm 1</option>
                             <option value="Năm 2">Năm 2</option>
                             <option value="Năm 3">Năm 3</option>
@@ -31,7 +32,7 @@
                     </div>
                     <div class="scheduleForm--wrap d-flex col-8">
                         <div class="scheduleForm--wrap__label col-4"><label for="">Môn học</label></div>
-                        <select name="subject_name" id="" class="col-8">
+                        <select name="subject_name" id="subject_name" class="col-8">
                             <option value="Toán">Toán</option>
                             <option value="Tiếng Việt">Tiếng Việt</option>
                             <option value="Giáo dục công dân">Giáo dục công dân</option>
@@ -80,19 +81,19 @@
                         ?>
 
                             <tr>
-                                <th scope="row"><?php echo $count += 1 ?></th>
+                                <th scope="row" class="idSchedule"><?php echo $count += 1 ?></th>
                                 <td> <?php echo $arrs['school_year'] ?></td>
                                 <td><?php echo $arrs['subject_name'] ?></td>
                                 <td><?php echo $arrs['name'] ?></td>
                                 <td><?php echo $arrs['week_day'] ?></td>
                                 <td><?php echo $arrs['lession'] ?></td>
                                 <td>
-
-                                    <div class="manageOption d-flex">
-                                        <div class="manageOption--delete me-2"><button class="btn btn-primary" onclick="openToast()" name="deleteSchedule" type="submit" value=<?php echo $arrs['id'] ?>>Xoá</button></div>
-                                        <div class="manageOption--edit"><button class="btn btn-primary">Sửa</button></div>
-                                    </div>
-
+                                <form action="" method="POST">
+                                        <div class="manageOption d-flex">
+                                            <div class="manageOption--delete me-2"><button class="btn btn-primary deleteSchedule" name="deleteSchedule" id="deleteSchedule"  value=<?php echo $arrs['id'] ?>>Xoá </button></div>
+                                            <div class="manageOption--edit"><button class="btn btn-primary">Sửa</button></div>
+                                        </div>
+                                </form>
                                 </td>
                             </tr>
                         <?php  }
@@ -102,34 +103,30 @@
                 </table>
             </div>
         </div>
-        <div class="ToastMsg" id="isToast">
-            <div class="ToastMsg--wrap">
-                <form method="POST">
-                    <div class="ToastMsg--title">
-                        <h5>Thông báo</h5>
-                    </div>
-                    <div class="ToastMsg--content">Bạn có muốn xoá thời khoá biểu?</div>
-                    <div class="ToastMsg--btn">
-                        <div class="ToastMsg--btn__cancel">
-                            <button class="btn btn-primary" id="cancel">Cancel</button>
+        <?php if(isset($isToast)){?>
+        <form action="" method="POST">
+        <div class="ToastMsg" id="isToast" >
+                <div class="ToastMsg--wrap">
+                        <div class="ToastMsg--title">
+                            <h5>Thông báo</h5>
                         </div>
-                        <div class="ToastMsg--btn__confirm">
-                            <button type="submit" class="btn btn-primary" name="confirm" id="confirm">OK</button>
+                        <div class="ToastMsg--content">Bạn có muốn xoá thời khoá biểu?</div>
+                        <div class="ToastMsg--btn">
+                            <div class="ToastMsg--btn__cancel">
+                                <button class="btn btn-primary" id="cancelDelete">Cancel</button>
+                            </div>
+                            <div class="ToastMsg--btn__confirm">
+                                <button  class="btn btn-primary" name="confirmDelete" id="confirmDelete">OK</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                </div>
         </div>
+        </form>
+        <?php } ?>
+            
     </div>
-    <script>
-        document.getElementById("cancel").addEventListener("click", function() {
-            document.getElementById("isToast").style.display = "none";
-        });
-
-        function openToast() {
-            document.getElementById("isToast").style.display = "flex";
-        }
-    </script>
+    <!-- <script src="../../assets/js/jquery-3.6.1.min.js"></script>
+    <script src="../../assets/js/schedule_search.js"></script> -->
 </body>
 
 </html>

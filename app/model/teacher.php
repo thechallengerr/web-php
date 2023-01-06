@@ -18,23 +18,49 @@ function get_all_teachers() //READ
 {
     global $connection;
 
-    $sql  = "SELECT * FROM `teachers`";
+    $sql  = "SELECT * FROM teachers ORDER BY teachers.id DESC";
 
     $result = $connection->query($sql);
-    $row = $result->fetch_array(MYSQLI_ASSOC);
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     return $row;
 }
 
-function get_some_teachers($params) //READ
+function search_teachers_by_specialized_and_keyword($specialized, $keyword) //READ
 {
     global $connection;
 
-    $sql  = "SELECT * FROM `teachers`
-            WHERE ... AND ...";
+    $sql  = "SELECT * FROM teachers WHERE teachers.specialized = '$specialized' 
+    AND (teachers.name LIKE '%$keyword%' OR teachers.description LIKE '%$keyword%' OR teachers.degree LIKE '%$keyword%') ORDER BY teachers.id DESC";
 
     $result = $connection->query($sql);
-    $row = $result->fetch_array(MYSQLI_ASSOC);
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    return $row;
+}
+
+function search_teachers_by_specialized($specialized) //READ
+{
+    global $connection;
+
+    $sql  = "SELECT * FROM teachers WHERE teachers.specialized = '$specialized' ORDER BY teachers.id DESC";
+
+    $result = $connection->query($sql);
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    return $row;
+}
+
+function search_teachers_by_keyword( $keyword) //READ
+{
+    global $connection;
+
+    $sql  = "SELECT * FROM teachers WHERE teachers.name LIKE '%$keyword%' 
+            OR teachers.description LIKE '%$keyword%' 
+            OR teachers.degree LIKE '%$keyword%' ORDER BY teachers.id DESC";
+
+    $result = $connection->query($sql);
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     return $row;
 }
@@ -52,15 +78,14 @@ function edit_teacher($params) //UPDATE
     return true;
 }
 
-function delete_teacher($params) //DELETE
+function delete_teacher($id) //DELETE
 {
     global $connection;
 
-    $sql  = "DELETE FROM `teachers`
-            WHERE ...";
-    /*
-    ....
-    */
+    $sql  = "DELETE FROM teachers
+            WHERE teachers.id=$id";
+    $connection->query($sql);
+
     return true;
 }
 
