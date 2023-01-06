@@ -35,7 +35,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item list-group-item-custom">
-                            <a href="">Tìm kiếm</a>
+                            <a href="teacher_search.php">Tìm kiếm</a>
                         </li>
                         <li class="list-group-item list-group-item-custom">
                             <a href="teacher_add_input.php">Thêm mới</a>
