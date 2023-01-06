@@ -1,6 +1,4 @@
-<?php
-var_dump($GLOBALS['isToast'])
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +7,6 @@ var_dump($GLOBALS['isToast'])
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../../assets/css/schedule_style.css">
 </head>
@@ -91,12 +88,10 @@ var_dump($GLOBALS['isToast'])
                                 <td><?php echo $arrs['week_day'] ?></td>
                                 <td><?php echo $arrs['lession'] ?></td>
                                 <td>
-                                    <form action="" method="POST">
                                         <div class="manageOption d-flex">
-                                            <div class="manageOption--delete me-2"><button class="btn btn-primary deleteSchedule" onclick="openToast(event)" name="deleteSchedule" id="deleteSchedule" type="submit" value=<?php echo $arrs['id'] ?>>Xoá </button></div>
+                                            <div class="manageOption--delete me-2"><button class="btn btn-primary deleteSchedule" name="deleteSchedule" id="deleteSchedule"  value=<?php echo $arrs['id'] ?>>Xoá </button></div>
                                             <div class="manageOption--edit"><button class="btn btn-primary">Sửa</button></div>
                                         </div>
-                                    </form>
 
 
                                 </td>
@@ -108,54 +103,26 @@ var_dump($GLOBALS['isToast'])
                 </table>
             </div>
         </div>
-        <?php
-        if (isset($isToast)) {
-        ?>
-            <div class="ToastMsg" id="isToast">
+        <div class="ToastMsg" id="isToast">
                 <div class="ToastMsg--wrap">
-                    <form method="POST">
                         <div class="ToastMsg--title">
                             <h5>Thông báo</h5>
                         </div>
                         <div class="ToastMsg--content">Bạn có muốn xoá thời khoá biểu?</div>
                         <div class="ToastMsg--btn">
                             <div class="ToastMsg--btn__cancel">
-                                <button class="btn btn-primary" id="cancel">Cancel</button>
+                                <button class="btn btn-primary" id="cancelDelete">Cancel</button>
                             </div>
                             <div class="ToastMsg--btn__confirm">
-                                <button type="submit" class="btn btn-primary" name="confirm" id="confirm">OK</button>
+                                <button  class="btn btn-primary" name="confirmDelete" id="confirmDelete">OK</button>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
-        <?php } ?>
-
-
+            
     </div>
-    <script>
-        $(document).ready(function() {
-            const depart = $("#school_year").val();
-            const key = $("#subject_name").val();
-            $("#school_year").change(updateValue(event));
-            $("#subject_name").change(updateKeySearch(event));
-
-            function updateValue(e) {
-                console.log(e.target.val);
-                localStorage.setItem("value1", e.target.value);
-            }
-
-            function updateKeySearch(e) {
-                localStorage.setItem("value2", e.target.value)
-
-            }
-            document.body.onload = () => {
-                // $("#school_year").val() = localStorage.getItem("value1");
-                // $("#subject_name").val() = localStorage.getItem("value2");
-            }
-
-        });
-    </script>
+    <script src="../../assets/js/jquery-3.6.1.min.js"></script>
+    <script src="../../assets/js/schedule_search.js"></script>
 </body>
 
 </html>
