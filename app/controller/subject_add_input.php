@@ -77,14 +77,14 @@ if (isset($_POST['submit_subject_add'])){
     }
     else {
         $files =  $_FILES['subject_avatar']['tmp_name'];
-        $name = $_FILES['subject_avatar']['name'].date('YmdHis');
+        $name = date('YmdHis').$_FILES['subject_avatar']['name'];
         $path = "../../assets/avatar/tmp/".$name;
         move_uploaded_file($files, $path);
         // kiểm tra có phải ảnh không, nếu không phải -> xóa + error
         if (! getimagesize("../../assets/avatar/tmp/".$name)) {
 
             /** cái if này đề phòng không xóa được file lỗi thì không bị nảy ra error
-             * cũng không rõ có cần thiết không hiếu or đạt check thì có thể sủa nhé  */
+             * cũng không rõ có cần thiết không hiếu or đạt check thì có thể sửa nhé  */
             if (unlink("../../assets/avatar/tmp/".$name)) {
 
             }
@@ -93,8 +93,10 @@ if (isset($_POST['submit_subject_add'])){
         }
         else{
             // có ảnh mới thì xóa ảnh cũ đi
-            if (unlink("../../assets/avatar/tmp/".$_POST['old_subject_avatar'])){
+            if (isset($_POST['old_subject_avatar'])){
+                if (unlink("../../assets/avatar/tmp/".$_POST['old_subject_avatar'])){
 
+                }
             }
         }
     }
