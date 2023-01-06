@@ -45,16 +45,18 @@ function get_some_subjects($school_year, $keyword) //READ
     return $row;
 }
 
-function edit_subject($params) //UPDATE
+function edit_subject($id, $subject_name, $subject_year, $subject_note, $subject_avatar) //UPDATE
 {
     global $connection;
 
-    $sql = "UPDATE `subjects`
-            SET ...
-            WHERE ...";
-    /*
-    ....
-    */
+    $sql = "UPDATE subjects
+            SET name = '$subject_name',
+            avatar = '$subject_avatar',
+            description = '$subject_note',
+            school_year = '$subject_year'
+            WHERE id = $id";
+    $connection->query($sql);
+    return true;
 }
 
 function delete_subject($id) //DELETE
@@ -74,5 +76,17 @@ function get_last_subject_id(){
     $last_id = $connection->insert_id;
 
     return $last_id;
+}
+
+function get_by_subject_id($id) //READ
+{
+    global $connection;
+
+    $sql  = "SELECT * FROM subjects WHERE subjects.id = $id  LIMIT 1";
+
+    $result = $connection->query($sql);
+    $row = mysqli_fetch_assoc($result);
+
+    return $row;
 }
 ?>
