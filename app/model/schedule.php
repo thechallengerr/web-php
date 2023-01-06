@@ -35,7 +35,6 @@ function deleteSchedule($id)
     global $connection;
     $sql = "Delete from schedules WHERE schedules.id='{$id}'";
     $result=$connection->query($sql);
-    var_dump($result);
     return $result;
 }
 

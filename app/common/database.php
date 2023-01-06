@@ -1,6 +1,8 @@
 <?php
-$host = "127.0.0.1";
+$host = "localhost";
 $user = "root";
-$pass = "root";
-$dbname = "manage_schedule";
+$pass = "";
+$dbname = "quanlythoikhoabieu";
+
 $connection = new mysqli($host, $user, $pass, $dbname);
+?>

@@ -1,17 +1,23 @@
 <?php
-session_start();
 include_once "../model/schedule.php";
 include_once '../common/database.php';
+include_once 'common.php';
+if(isset($_POST['deleteSchedule'])){
+    $isToast=true;
+    $_SESSION['idDelete']=$_POST['deleteSchedule'];
+    $allSchedule = getAllSchedule();
+    include_once "../views/schedule_search.php";
+}
+if(isset($_POST['confirmDelete'])){
+    deleteSchedule($_SESSION['idDelete']);
+    allSchedule();
+}
 if (isset($_POST['schedule_search'])) {
     searchSchedule();
 }else{
     allSchedule();
 }
-if(isset($_GET["idDelete"])) {
-    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    header_remove($actual_link);
-    // allSchedule();
-}
+
 function searchSchedule()
 {
     $school_year = $_POST['school_year'];

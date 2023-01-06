@@ -88,12 +88,12 @@
                                 <td><?php echo $arrs['week_day'] ?></td>
                                 <td><?php echo $arrs['lession'] ?></td>
                                 <td>
+                                <form action="" method="POST">
                                         <div class="manageOption d-flex">
                                             <div class="manageOption--delete me-2"><button class="btn btn-primary deleteSchedule" name="deleteSchedule" id="deleteSchedule"  value=<?php echo $arrs['id'] ?>>Xoá </button></div>
                                             <div class="manageOption--edit"><button class="btn btn-primary">Sửa</button></div>
                                         </div>
-
-
+                                </form>
                                 </td>
                             </tr>
                         <?php  }
@@ -103,7 +103,9 @@
                 </table>
             </div>
         </div>
-        <div class="ToastMsg" id="isToast">
+        <?php if(isset($isToast)){?>
+        <form action="" method="POST">
+        <div class="ToastMsg" id="isToast" >
                 <div class="ToastMsg--wrap">
                         <div class="ToastMsg--title">
                             <h5>Thông báo</h5>
@@ -118,11 +120,13 @@
                             </div>
                         </div>
                 </div>
-            </div>
+        </div>
+        </form>
+        <?php } ?>
             
     </div>
-    <script src="../../assets/js/jquery-3.6.1.min.js"></script>
-    <script src="../../assets/js/schedule_search.js"></script>
+    <!-- <script src="../../assets/js/jquery-3.6.1.min.js"></script>
+    <script src="../../assets/js/schedule_search.js"></script> -->
 </body>
 
 </html>
