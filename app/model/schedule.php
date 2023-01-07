@@ -1,7 +1,7 @@
 <?php
 
 // connect db
-include_once "../common/database.php";
+include_once '../common/database.php';
 // tìm kiếm thời khoá biểu
 function scheduleSearch($school_year, $subject_name, $teacher_name)
 {
@@ -34,7 +34,8 @@ function deleteSchedule($id)
 {
     global $connection;
     $sql = "Delete from schedules WHERE schedules.id='{$id}'";
-    $connection->query($sql);
+    $result=$connection->query($sql);
+    return $result;
 }
 
 
