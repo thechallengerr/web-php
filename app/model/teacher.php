@@ -26,6 +26,18 @@ function get_all_teachers() //READ
     return $row;
 }
 
+function get_teacher_name_by_id($id) //READ
+{
+    global $connection;
+
+    $sql  = "SELECT name FROM teachers WHERE id = '$id'";
+
+    $result = $connection->query($sql);
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    return $row;
+}
+
 function search_teachers_by_specialized_and_keyword($specialized, $keyword) //READ
 {
     global $connection;
@@ -96,4 +108,3 @@ function get_last_id(){
 
     return $last_id;
 }
-?>

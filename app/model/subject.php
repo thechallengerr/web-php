@@ -32,6 +32,18 @@ function get_all_subjects() //READ
     return $row;
 }
 
+function get_subject_name_by_id($id) //READ
+{
+    global $connection;
+
+    $sql  = "SELECT name FROM subjects WHERE id = '$id'";
+
+    $result = $connection->query($sql);
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    return $row;
+}
+
 function search_subjects_by_year_and_keyword($school_year, $keyword) //READ
 {
     global $connection;

@@ -34,7 +34,7 @@ function deleteSchedule($id)
 {
     global $connection;
     $sql = "Delete from schedules WHERE schedules.id='{$id}'";
-    $result=$connection->query($sql);
+    $result = $connection->query($sql);
     return $result;
 }
 
@@ -95,11 +95,11 @@ function edit_schedule($schedule_id, $school_year, $subject_id, $teacher_id, $we
     global $connection;
 
     $sql = "UPDATE `schedules`
-    SET school_year = '$school_year'
-        subject_id = '$subject_id'
-        teacher_id = '$teacher_id'
-        week_day = '$week_day'
-        lession = '$lession'
+    SET school_year = '$school_year',
+        subject_id = '$subject_id',
+        teacher_id = '$teacher_id',
+        week_day = '$week_day',
+        lession = '$lession',
         notes = '$notes'
     WHERE id = '$schedule_id'";
 

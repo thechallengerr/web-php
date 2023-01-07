@@ -1,7 +1,7 @@
 <?php
 include("../common/database.php");
 include("../common/define.php");
-error_reporting(0);
+
 ?>
 
 <!DOCTYPE html>
@@ -27,14 +27,19 @@ error_reporting(0);
                 <label class="col-sm-2" for="year">Khóa học</label>
                 <div class="col-sm-6">
 
-                    <select name="school_year" class="form-control">
+                    <select id="school_year" class="form-control" name="school_year">
                         <option <?php empty($_SESSION['school_year']) ? "selected" : "" ?> value="">
-                            <--- Chọn năm học --->
+                            <--- Chọn năm học--->
                         </option>
-                        <option value="Năm 1">Năm 1</option>
-                        <option value="Năm 2">Năm 2</option>
-                        <option value="Năm 3">Năm 3</option>
-                        <option value="Năm 4">Năm 4</option>
+                        <?php
+                        $school_year = constant('YEAR');
+                        foreach ($school_year as $key => $value) {
+                            $selected = ($value == $schedule['school_year'] ? "selected" : "");
+                        ?>
+                            <option <?php echo $selected; ?> value="<?= $value ?>"><?= $value ?></option>
+                        <?php
+                        }
+                        ?>
                     </select>
                     <span class="text-danger font-weight-bold">
                         <?php echo $errors['school_year'];
@@ -47,16 +52,19 @@ error_reporting(0);
                 <div class="col-sm-6">
 
                     <select name="subject_id" id="subject" class="form-control">
-                        <option value="">
+                        <option <?php empty($_SESSION['subject_id']) ? "selected" : "" ?> value="">
                             <--- Chọn môn học --->
                         </option>
-                        <option value="1">
-                            toán cao cấp
-                        </option>
+
                         <?php
 
                         foreach ($subjects as $subject) {
-                            echo '<option value="' . $subject["id"] . '">' . $subject["name"] . '</option>';
+                            if ($subject["id"] == $schedule["subject_id"]) {
+
+                                echo '<option selected value="' . $subject["id"] . '">' . $subject["name"] . '</option>';
+                            } else {
+                                echo '<option value="' . $subject["id"] . '">' . $subject["name"] . '</option>';
+                            }
                         }
                         ?>
                     </select>
@@ -73,12 +81,15 @@ error_reporting(0);
                         <option value="">
                             <--- Chọn giáo viên --->
                         </option>
-                        <option value="3">
-                            Nguyenx Văn A
-                        </option>
+
                         <?php
                         foreach ($teachers as $teacher) {
-                            echo '<option value="' . $teacher["id"] . '">' . $teacher["name"] . '</option>';
+                            if ($teacher["id"] == $schedule["teacher_id"]) {
+
+                                echo '<option selected value="' . $teacher["id"] . '">' . $teacher["name"] . '</option>';
+                            } else {
+                                echo '<option value="' . $teacher["id"] . '">' . $teacher["name"] . '</option>';
+                            }
                         }
                         ?>
                     </select>
@@ -93,19 +104,21 @@ error_reporting(0);
                 <label class="col-sm-2" for="weekday">Thứ</label>
                 <div class="col-sm-6">
 
-                    <select id="weekday" name="week_day" class="form-control">
-                        <option value="">
-                            <--- Chọn thứ --->
+                    <select id="school_year" class="form-control" name="week_day">
+                        <option <?php empty($_SESSION['week_day']) ? "selected" : "" ?> value="">
+                            <--- Chọn Thứ--->
                         </option>
-                        <option value="Thứ 2">Thứ 2</option>
-                        <option value="Thứ 3">Thứ 3</option>
-                        <option value="Thứ 4">Thứ 4</option>
-                        <option value="Thứ 5">Thứ 5</option>
-                        <option value="Thứ 6">Thứ 6</option>
-                        <option value="Thứ 7">Thứ 7</option>
-                        <option value="Chủ Nhật">Chủ Nhật</option>
+                        <?php
+                        $weekday = constant('WEEKDAY');
+                        foreach ($weekday as $key => $value) {
+                            $selected = ($value == $schedule['week_day'] ? "selected" : "");
+                        ?>
+                            <option <?php echo $selected; ?> value="<?= $value ?>"><?= $value ?></option>
+                        <?php
+                        }
+                        ?>
                     </select>
-                    <span class="text-danger font-weight-bold">
+                    <span class="text-danger font-weight-bold col-sm-10">
                         <?php echo $errors['week_day'];
                         ?>
                     </span>
@@ -116,14 +129,22 @@ error_reporting(0);
                 <label class="col-sm-2" for="lession">Tiết</label>
                 <div class="col-sm-10 d-flex justify-content-between">
                     <?php
-                    $lessions = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
-                    foreach ($lessions as $lession) {
-                        echo "<div class='form-check'>
-                                    <input name='lession' class='form-check-input' type='checkbox' value='{$lession}' id='lession{$lession}' >
-                                    <label class='form-check-label' for='lession{$lession}'>
-                                    Tiết {$lession}
-                                    </label>
-                                </div>";
+                    $lession = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
+                    if (isset($_SESSION["lession"])) {
+                        $lessionArr = explode(",", $_SESSION['lession']);
+                    } else {
+                        $lessionArr = explode(",", $schedule['lession']);
+                    }
+                    foreach ($lession as  $value) {
+                        $checked = (in_array($value, $lessionArr) ? "checked" : "");
+                    ?>
+                        <div class='form-check'>
+                            <input name='lession[]' class='form-check-input' type='checkbox' value='<?php echo $value; ?>' id='lession<?php echo $value; ?>' <?php echo $checked ?>>
+                            <label class='form-check-label' for='lession<?php echo $value; ?>'>
+                                Tiết <?php echo $value; ?>
+                            </label>
+                        </div>
+                    <?php
                     }
                     ?>
                     <span class="text-danger font-weight-bold">
@@ -136,7 +157,7 @@ error_reporting(0);
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="notes">Chú ý</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" id="notes" name="notes" rows="5"></textarea>
+                    <textarea class="form-control" id="notes" name="notes" rows="5"><?php echo $schedule["notes"] ?></textarea>
                     <span class="text-danger font-weight-bold">
                         <?php echo $errors['notes'];
                         ?>
