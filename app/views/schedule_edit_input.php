@@ -1,6 +1,7 @@
 <?php
 include("../common/database.php");
 include("../common/define.php");
+error_reporting(0);
 ?>
 
 <!DOCTYPE html>
@@ -21,13 +22,13 @@ include("../common/define.php");
     ?>
     <div class="container">
         <h1 class="text-center mt-5">Sửa thời khóa biểu</h1>
-        <form action="" method="post" class="mt-5 mb-5 border border-primary rounded p-5">
+        <form action="../controller/schedule_edit_input.php" method="post" class="mt-5 mb-5 border border-primary rounded p-5">
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="year">Khóa học</label>
                 <div class="col-sm-6">
 
                     <select name="school_year" class="form-control">
-                        <option>
+                        <option <?php empty($_SESSION['school_year']) ? "selected" : "" ?> value="">
                             <--- Chọn năm học --->
                         </option>
                         <option value="Năm 1">Năm 1</option>
@@ -35,6 +36,10 @@ include("../common/define.php");
                         <option value="Năm 3">Năm 3</option>
                         <option value="Năm 4">Năm 4</option>
                     </select>
+                    <span class="text-danger font-weight-bold">
+                        <?php echo $errors['school_year'];
+                        ?>
+                    </span>
                 </div>
             </div>
             <div class="form-group row mt-4">
@@ -42,8 +47,11 @@ include("../common/define.php");
                 <div class="col-sm-6">
 
                     <select name="subject_id" id="subject" class="form-control">
-                        <option selected>
+                        <option value="">
                             <--- Chọn môn học --->
+                        </option>
+                        <option value="1">
+                            toán cao cấp
                         </option>
                         <?php
 
@@ -52,14 +60,21 @@ include("../common/define.php");
                         }
                         ?>
                     </select>
+                    <span class="text-danger font-weight-bold">
+                        <?php echo $errors['subject_id'];
+                        ?>
+                    </span>
                 </div>
             </div>
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="teacher">Giáo viên</label>
                 <div class="col-sm-6">
                     <select name="teacher_id" id="teacher" class="form-control">
-                        <option selected>
+                        <option value="">
                             <--- Chọn giáo viên --->
+                        </option>
+                        <option value="3">
+                            Nguyenx Văn A
                         </option>
                         <?php
                         foreach ($teachers as $teacher) {
@@ -67,6 +82,10 @@ include("../common/define.php");
                         }
                         ?>
                     </select>
+                    <span class="text-danger font-weight-bold">
+                        <?php echo $errors['teacher_id'];
+                        ?>
+                    </span>
                 </div>
             </div>
 
@@ -75,7 +94,7 @@ include("../common/define.php");
                 <div class="col-sm-6">
 
                     <select id="weekday" name="week_day" class="form-control">
-                        <option selected>
+                        <option value="">
                             <--- Chọn thứ --->
                         </option>
                         <option value="Thứ 2">Thứ 2</option>
@@ -86,6 +105,10 @@ include("../common/define.php");
                         <option value="Thứ 7">Thứ 7</option>
                         <option value="Chủ Nhật">Chủ Nhật</option>
                     </select>
+                    <span class="text-danger font-weight-bold">
+                        <?php echo $errors['week_day'];
+                        ?>
+                    </span>
                 </div>
             </div>
 
@@ -96,21 +119,28 @@ include("../common/define.php");
                     $lessions = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
                     foreach ($lessions as $lession) {
                         echo "<div class='form-check'>
-                                    <input class='form-check-input' type='checkbox' value='{$lession}' id='lession{$lession}' name='lession'>
-                                    <label class='form-check-label' for='lession{$lession}''>
+                                    <input name='lession' class='form-check-input' type='checkbox' value='{$lession}' id='lession{$lession}' >
+                                    <label class='form-check-label' for='lession{$lession}'>
                                     Tiết {$lession}
                                     </label>
                                 </div>";
                     }
                     ?>
-
+                    <span class="text-danger font-weight-bold">
+                        <?php echo $errors['lession'];
+                        ?>
+                    </span>
                 </div>
             </div>
 
             <div class="form-group row mt-4">
-                <label class="col-sm-2" for="note">Chú ý</label>
+                <label class="col-sm-2" for="notes">Chú ý</label>
                 <div class="col-sm-10">
                     <textarea class="form-control" id="notes" name="notes" rows="5"></textarea>
+                    <span class="text-danger font-weight-bold">
+                        <?php echo $errors['notes'];
+                        ?>
+                    </span>
                 </div>
             </div>
             <div class="mt-5 d-flex justify-content-center">

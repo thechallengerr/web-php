@@ -64,6 +64,18 @@ function get_all_schedules() //READ
     return $row;
 }
 
+function get_schedule_by_id($id) //READ
+{
+    global $connection;
+
+    $sql  = "SELECT * FROM `schedules` WHERE `id` = '$id'";
+
+    $result = $connection->query($sql);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    return $row;
+}
+
 function get_some_schedules($params) //READ
 {
     global $connection;
@@ -89,9 +101,8 @@ function edit_schedule($schedule_id, $school_year, $subject_id, $teacher_id, $we
         lession = '$lession'
         notes = '$notes'
     WHERE id = '$schedule_id'";
-    /*
-    ....
-    */
+
+    $result = $connection->query($sql);
     return true;
 }
 

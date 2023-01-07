@@ -5,4 +5,3 @@ $pass = "";
 $dbname = "quanlythoikhoabieu";
 
 $connection = new mysqli($host, $user, $pass, $dbname);
-?>
