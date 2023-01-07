@@ -24,10 +24,9 @@ include '../common/navbar.php';
                 <div class="scheduleForm--wrap d-flex col-8">
                     <div class="scheduleForm--wrap__label col-4"><label for="">Khoá</label></div>
                     <select name="school_year" id="school_year" class="col-8">
-                        <option value="Năm 1">Năm 1</option>
-                        <option value="Năm 2">Năm 2</option>
-                        <option value="Năm 3">Năm 3</option>
-                        <option value="Năm 4">Năm 4</option>
+                    <?php foreach (constant("YEAR") as $key => $value) { ?>
+                                <option><?php echo $value; ?></option>
+                            <?php } ?>
                     </select>
                 </div>
                 <div class="scheduleForm--wrap d-flex col-8">

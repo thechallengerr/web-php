@@ -3,6 +3,7 @@ include_once "../model/schedule.php";
 include_once "../model/subject.php";
 include_once "../model/teacher.php";
 include_once '../common/database.php';
+include_once '../common/define.php';
 include_once 'common.php';
 if (isset($_POST['deleteSchedule'])) {
     $isToast = true;
