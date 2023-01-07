@@ -32,7 +32,7 @@ function get_all_subjects() //READ
     return $row;
 }
 
-function get_some_subjects($school_year, $keyword) //READ
+function search_subjects_by_year_and_keyword($school_year, $keyword) //READ
 {
     global $connection;
 
@@ -45,16 +45,42 @@ function get_some_subjects($school_year, $keyword) //READ
     return $row;
 }
 
-function edit_subject($params) //UPDATE
+function search_subjects_by_year($school_year) //READ
 {
     global $connection;
 
-    $sql = "UPDATE `subjects`
-            SET ...
-            WHERE ...";
-    /*
-    ....
-    */
+    $sql  = "SELECT * FROM subjects WHERE subjects.school_year = '$school_year' ORDER BY subjects.id DESC";
+
+    $result = $connection->query($sql);
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    return $row;
+}
+
+function search_subjects_by_keyword($keyword) //READ
+{
+    global $connection;
+
+    $sql  = "SELECT * FROM subjects WHERE subjects.name LIKE '%$keyword%' OR subjects.description LIKE '%$keyword%' ORDER BY subjects.id DESC";
+
+    $result = $connection->query($sql);
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    return $row;
+}
+
+function edit_subject($id, $subject_name, $subject_year, $subject_note, $subject_avatar) //UPDATE
+{
+    global $connection;
+
+    $sql = "UPDATE subjects
+            SET name = '$subject_name',
+            avatar = '$subject_avatar',
+            description = '$subject_note',
+            school_year = '$subject_year'
+            WHERE id = $id";
+    $connection->query($sql);
+    return true;
 }
 
 function delete_subject($id) //DELETE
@@ -68,11 +94,23 @@ function delete_subject($id) //DELETE
     return true;
 }
 
-function get_last_subject_id(){
+function get_last_subject_id()
+{
     global $connection;
 
     $last_id = $connection->insert_id;
 
     return $last_id;
 }
-?>
+
+function get_by_subject_id($id) //READ
+{
+    global $connection;
+
+    $sql  = "SELECT * FROM subjects WHERE subjects.id = $id  LIMIT 1";
+
+    $result = $connection->query($sql);
+    $row = mysqli_fetch_assoc($result);
+
+    return $row;
+}

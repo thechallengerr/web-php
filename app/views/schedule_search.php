@@ -45,7 +45,6 @@ include '../common/navbar.php';
                         <?php foreach ($allTeacher as $teacher) {
                             echo "<option value={$teacher['name']}>{$teacher['name']}</option>";
                         } ?>
-
                     </select>
                 </div>
                 <div class="scheduleForm--wrap d-flex col-8">

@@ -4,7 +4,7 @@ include '../common/database.php';
 include '../model/subject.php';
 include '../controller/common.php';
 
-if (! isset($_POST['confirm_subject_app'])){
+if (isset($_POST['confirm_subject_add'])){
 
     $subject_name = $_POST['subject_name'];
     $school_year = $_POST['school_year'];
@@ -23,6 +23,7 @@ if (! isset($_POST['confirm_subject_app'])){
             mkdir($dir, 0700);
         }
 
+        //copy file ảnh từ file tạm thời sang file vừa tạo + xóa ảnh ở file tạm thời
         $file_path_from = "../../assets/avatar/tmp/{$subject_avatar}";
         $file_path_to = "../../assets/avatar/subject/{$last_subject_id}/{$subject_avatar}";
         copy($file_path_from, $file_path_to);
@@ -37,7 +38,8 @@ if (! isset($_POST['confirm_subject_app'])){
     else{
         include '../views/subject_add_input.php';
     }
-
+}else{
+    include_once "../views/subject_add_input.php";
 }
 
 ?>

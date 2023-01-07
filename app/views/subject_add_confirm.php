@@ -13,6 +13,7 @@
 
 <?php
 include '../common/navbar.php';
+include '../common/define.php';
 session_start();
 ?>
 <div class="container">
@@ -27,7 +28,9 @@ session_start();
         <div class="form-group row mt-4">
             <label class="col-sm-2" for="school_year">Khóa</label>
             <div class="col-sm-6">
-                <input class="form-control" id="school_year" name="school_year" value="<?= $_SESSION['school_year'];?>" readonly>
+                <?php $school_year = constant('YEAR'); ?>
+                <input class="form-control" id="school_year" name="school_year_visible" value="<?= $school_year[$_SESSION['school_year']];?>" readonly>
+                <input class="form-control" type="hidden" id="school_year" name="school_year" value="<?= $_SESSION['school_year'];?>">
             </div>
         </div>
 
