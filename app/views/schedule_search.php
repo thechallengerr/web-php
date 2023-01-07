@@ -34,16 +34,16 @@ include '../common/navbar.php';
                     <div class="scheduleForm--wrap__label col-4"><label for="">Môn học</label></div>
                     <select name="subject_name" id="subject_name" class="col-8">
                         <?php foreach ($allSubject as $subject) {
-                            echo "<option value={$subject['name']}>{$subject['name']}</option>";
+                            echo "<option value='$subject[name]'>{$subject['name']}</option>";
                         } ?>
 
                     </select>
                 </div>
                 <div class="scheduleForm--wrap col-8 d-flex">
                     <div class="scheduleForm--wrap__label col-4"><label for="">Giáo viên</label></div>
-                    <select name="teacher_name" id="" class="col-8">
+                    <select name="teacher_name"  id="" class="col-8">
                         <?php foreach ($allTeacher as $teacher) {
-                            echo "<option value={$teacher['name']}>{$teacher['name']}</option>";
+                            echo "<option value='$teacher[name]'>{$teacher['name']}</option>";
                         } ?>
                     </select>
                 </div>
