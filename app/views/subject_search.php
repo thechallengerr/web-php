@@ -22,9 +22,16 @@
                     <label class="col-sm-2" for="school_year_id">Khoá học</label>
                     <div class="col-sm-6">
                         <select name="school_year" id="school_year_id" class="form-select">
-                            <option selected></option>
+                            <option value=""></option>
                             <?php foreach (constant("YEAR") as $key => $value) { ?>
-                                <option><?php echo $value; ?></option>
+                                <option value="<?php echo $key; ?>"
+                                    <?php 
+                                        if(array_key_exists('subject_search',$_GET)) {
+                                            if ($_SESSION['school_year'] === $key) {
+                                                echo "selected";   
+                                            }
+                                        }           
+                                    ?>><?php echo $value; ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -32,7 +39,13 @@
                 <div class="form-group row mt-4 justify-content-md-center">
                     <label class="col-sm-2" for="keyword_id">Từ khóa</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="keyword_id" name="keyword">
+                        <input type="text" class="form-control" id="keyword_id" name="keyword"
+                        <?php
+                            if(array_key_exists("subject_search",$_GET)) {
+                                echo "value='" . $_SESSION["keyword"] ."'";
+                            }
+                        ?>
+                        >
                     </div>
                 </div>
                 <div class="form-group">
@@ -44,7 +57,7 @@
         </div>
         
         <div class="mt-3">Số bản ghi tìm thấy: <?php print_r(count($row))?></div>
-        <div class="col-sm-12">
+        <div class="table-responsive col-sm-12" style="height: 300px;">
             <table class="table table-bordered">
                 <colgroup>
                     <col width="50" span="1">

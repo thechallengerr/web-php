@@ -24,7 +24,7 @@
                         <select name="specialized" id="specialized_id" class="form-select">
                             <option selected></option>
                             <?php foreach (constant("SPECIALIZED") as $key => $value) { ?>
-                                <option><?php echo $value; ?></option>
+                                <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -43,7 +43,7 @@
             </form>
         </div>
         <div class="mt-3">Số bản ghi tìm thấy: <?php print_r(count($row))?></div>
-        <div class="col-sm-12">
+        <div class="table-responsive col-sm-12" style="height: 300px;">
             <table class="table table-bordered">
                 <colgroup>
                     <col width="50" span="1">

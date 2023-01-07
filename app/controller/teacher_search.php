@@ -12,16 +12,14 @@ if(isset($_GET["delete_teacher"])) {
 
 $row = get_all_teachers(); 
 if (isset($_GET["teacher_search"])) {
-    $specialized_value = $_GET["specialized"];
+    $specialized_key = $_GET["specialized"];
     $keyword_value = $_GET["teacher_keyword"];
-
-    $specialized_key = array_search ($specialized_value, constant('SPECIALIZED'));
     
-    if($specialized_value != '' or $keyword_value == ''){
+    if($specialized_key != '' or $keyword_value == ''){
         $row = search_teachers_by_specialized($specialized_key);
-    }elseif($specialized_value == '' or $keyword_value != ''){
+    }elseif($specialized_key == '' or $keyword_value != ''){
         $row = search_teachers_by_keyword($keyword_value);
-    }elseif($specialized_value != '' and $keyword_value != ''){
+    }elseif($specialized_key != '' and $keyword_value != ''){
         $row = search_teachers_by_specialized_and_keyword($specialized_key, $keyword_value); 
     }
    
