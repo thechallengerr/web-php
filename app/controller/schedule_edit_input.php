@@ -77,7 +77,7 @@ if (isset($_POST['confirm_edit'])) {
         include_once "../views/schedule_edit_input.php";
     }
 } elseif (isset($_POST["edit_schedule"])) {
-    $schedule_id = $_SESSION['schedule_id'];
+    $schedule_id = 1;
     $school_year = $_SESSION['school_year'];
     $subject_id = $_SESSION['subject_id'];
     $teacher_id = $_SESSION['teacher_id'];
@@ -91,4 +91,3 @@ if (isset($_POST['confirm_edit'])) {
 } else {
     include_once "../views/schedule_edit_input.php";
 }
-// include_once '../views/schedule_edit_input.php';
