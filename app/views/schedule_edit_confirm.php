@@ -30,7 +30,7 @@
                 <div class="col-sm-6">
 
                     <?php
-                    echo '<input type="text" name="subject_id" class="form-control-plaintext" value="' . $subject['name'] . '">';
+                    echo '<input type="text" name="subject_id" class="form-control-plaintext" value="' . get_subject_name_by_id($_SESSION['subject_id'])['name'] . '">';
                     ?>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 <div class="col-sm-6">
 
                     <?php
-                    echo '<input type="text" name="teacher_id" class="form-control-plaintext" value="' . $teacher['name'] . '">';
+                    echo '<input type="text" name="teacher_id" class="form-control-plaintext" value="' . get_teacher_name_by_id($_SESSION['teacher_id'])['name'] . '">';
                     ?>
                 </div>
             </div>

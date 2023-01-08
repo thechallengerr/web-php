@@ -33,7 +33,7 @@ function get_teacher_name_by_id($id) //READ
     $sql  = "SELECT name FROM teachers WHERE id = '$id'";
 
     $result = $connection->query($sql);
-    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $row = mysqli_fetch_assoc($result);
 
     return $row;
 }
@@ -63,7 +63,7 @@ function search_teachers_by_specialized($specialized) //READ
     return $row;
 }
 
-function search_teachers_by_keyword( $keyword) //READ
+function search_teachers_by_keyword($keyword) //READ
 {
     global $connection;
 
@@ -101,7 +101,8 @@ function delete_teacher($id) //DELETE
     return true;
 }
 
-function get_last_id(){
+function get_last_id()
+{
     global $connection;
 
     $last_id = $connection->insert_id;

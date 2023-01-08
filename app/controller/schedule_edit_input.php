@@ -7,12 +7,10 @@ include_once '../common/database.php';
 
 $_SESSION["schedule_id"] = $_GET["id"];
 $schedule = get_schedule_by_id($_SESSION["schedule_id"]);
-$teacher_name = get_teacher_name_by_id($schedule["teacher_id"]);
-$subject_name = get_subject_name_by_id($schedule["subject_id"]);
 $errors = array('school_year' => '', 'subject_id' => '', 'teacher_id' => '', 'week_day' => '', 'lession' => '', 'notes' => '');
 $school_year = $subject_id = $teacher_id = $week_day = $notes = '';
 $lessions = array();
-// $schedule_id = ;
+
 function checkData($data)
 {
     $data = trim($data);
@@ -56,8 +54,6 @@ if (isset($_POST['confirm_edit'])) {
         foreach ($_POST['lession'] as $value) {
             $lessions[] = $value;
         }
-        // echo implode(',',$lessions);
-        // echo count($lession);
     }
 
     if (empty($_POST['notes'])) {
