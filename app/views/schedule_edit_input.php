@@ -22,7 +22,7 @@ include("../common/define.php");
     ?>
     <div class="container">
         <h1 class="text-center mt-5">Sửa thời khóa biểu</h1>
-        <form action="../controller/schedule_edit_input.php" method="post" class="mt-5 mb-5 border border-primary rounded p-5">
+        <form action="../controller/schedule_edit_input.php?id=<?php echo $_SESSION["schedule_id"] ?>" method="post" class="mt-5 mb-5 border border-primary rounded p-5">
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="year">Khóa học</label>
                 <div class="col-sm-6">
