@@ -4,11 +4,13 @@ include_once "../model/schedule.php";
 include_once "../model/teacher.php";
 include_once "../model/subject.php";
 include_once '../common/database.php';
-$schedule = get_schedule_by_id(1);
+
+$_SESSION["schedule_id"] = $_GET["id"];
+$schedule = get_schedule_by_id($_SESSION["schedule_id"]);
 $errors = array('school_year' => '', 'subject_id' => '', 'teacher_id' => '', 'week_day' => '', 'lession' => '', 'notes' => '');
 $school_year = $subject_id = $teacher_id = $week_day = $notes = '';
 $lessions = array();
-// $schedule_id = $_SESSION["schedule_id"];
+
 function checkData($data)
 {
     $data = trim($data);
@@ -52,8 +54,6 @@ if (isset($_POST['confirm_edit'])) {
         foreach ($_POST['lession'] as $value) {
             $lessions[] = $value;
         }
-        // echo implode(',',$lessions);
-        // echo count($lession);
     }
 
     if (empty($_POST['notes'])) {
@@ -63,11 +63,9 @@ if (isset($_POST['confirm_edit'])) {
     }
 
     if (!empty($_POST['school_year']) && !empty($_POST['subject_id']) && !empty($_POST['teacher_id']) && !empty($_POST['week_day']) && !empty($_POST['lession']) && !empty($_POST['notes'])) {
-        // $_SESSION['schedule_id'] = 1;
         $_SESSION['school_year'] = $_POST['school_year'];
         $_SESSION['subject_id'] = $_POST['subject_id'];
         $_SESSION['teacher_id'] = $_POST['teacher_id'];
-        // $_SESSION['teacher_name'] = $_POST['teacher_id'];
         $_SESSION['week_day'] = $_POST['week_day'];
         $_SESSION['lession'] = implode(',', $_POST["lession"]);
         $_SESSION['notes'] = $_POST['notes'];
@@ -76,19 +74,6 @@ if (isset($_POST['confirm_edit'])) {
     } else {
         include_once "../views/schedule_edit_input.php";
     }
-} elseif (isset($_POST["edit_schedule"])) {
-    $schedule_id = $_SESSION['schedule_id'];
-    $school_year = $_SESSION['school_year'];
-    $subject_id = $_SESSION['subject_id'];
-    $teacher_id = $_SESSION['teacher_id'];
-    $week_day = $_SESSION['week_day'];
-    $lession = $_SESSION['lession'];
-
-    $notes = $_SESSION['notes'];
-    if (edit_schedule($schedule_id, $school_year, $subject_id, $teacher_id, $week_day, $lession, $notes)) {
-        include_once "../views/schedule_edit_complete.php";
-    }
 } else {
     include_once "../views/schedule_edit_input.php";
 }
-// include_once '../views/schedule_edit_input.php';

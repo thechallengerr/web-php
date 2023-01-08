@@ -16,7 +16,7 @@
     ?>
     <div class="container">
         <h1 class="text-center mt-5">Sửa thời khóa biểu</h1>
-        <form action="../controller/schedule_edit_input.php" method="POST" class="mt-5 mb-5 border border-primary rounded p-5">
+        <form action="../controller/schedule_edit_confirm.php" method="POST" class="mt-5 mb-5 border border-primary rounded p-5">
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="year">Khóa học</label>
                 <div class="col-sm-6">
@@ -30,7 +30,7 @@
                 <div class="col-sm-6">
 
                     <?php
-                    echo '<input type="text" name="subject_id" class="form-control-plaintext" value="' . get_subject_name_by_id($_SESSION['subject_id'])["name"] . '">';
+                    echo '<input type="text" name="subject_id" class="form-control-plaintext" value="' . get_subject_name_by_id($_SESSION['subject_id'])['name'] . '">';
                     ?>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 <div class="col-sm-6">
 
                     <?php
-                    echo '<input type="text" name="teacher_id" class="form-control-plaintext" value="' . get_teacher_name_by_id($_SESSION['teacher_id'])["name"] . '">';
+                    echo '<input type="text" name="teacher_id" class="form-control-plaintext" value="' . get_teacher_name_by_id($_SESSION['teacher_id'])['name'] . '">';
                     ?>
                 </div>
             </div>
