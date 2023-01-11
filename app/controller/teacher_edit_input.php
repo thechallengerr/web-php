@@ -74,6 +74,11 @@ if (isset($_POST['teacher_edit_submit'])){
             if (unlink("../../assets/avatar/tmp/".$name)) {
 
             }
+            else{
+                $error['unlink'] = 'Không xóa được';
+
+                include '../views/teacher_edit_input.php';
+            }
 
             $error['teacher_avatar_empty'] = 'Hãy chọn file png hoặc jpg';
         }

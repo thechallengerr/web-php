@@ -27,7 +27,9 @@ if (isset($_POST['teacher_edit_confirm'])){
             if (unlink($old_file_path)){
 
             }else{
+                $error['unlink'] = 'Không xóa được';
 
+                header('Location:teacher_edit_input.php');
             }
 
             //copy file ảnh từ file tạm thời sang file chứa ảnh + xóa ảnh ở file tạm thời
@@ -40,18 +42,52 @@ if (isset($_POST['teacher_edit_confirm'])){
                 unset($_SESSION['teacher_note']);
                 unset($_SESSION['teacher_avatar']);
                 unset($_SESSION['teacher_degree']);
-            
-                include 'teacher_edit_complete.php';
+
+                header('Location:teacher_edit_complete.php');
+            }else{
+                $error['unlink'] = 'Không xóa được';
+
+                header('Location:teacher_edit_input.php?edit_teacher='.$teacher_info['id']);
             }
         }
 
     }
     else{
+        $teacher_name = $_POST['teacher_name'];
+        $teacher_speicalized = $_POST['teacher_specialized'];
+        $teacher_degree = $_POST['teacher_degree'];
+        $teacher_note = $_POST['teacher_note'];
+        $teacher_avatar = $teacher_info['avatar'];
 
+        if (edit_teacher_by_id($teacher_info['id'], $teacher_name, $teacher_avatar, $teacher_note, $teacher_speicalized, $teacher_degree)){
+            unset($_SESSION['teacher_name']);
+            unset($_SESSION['teacher_specialized']);
+            unset($_SESSION['teacher_note']);
+            unset($_SESSION['teacher_avatar']);
+            unset($_SESSION['teacher_degree']);
+
+            header('Location:teacher_edit_complete.php');
+        }
     }
 
 }elseif (isset($_POST['teacher_edit_fix'])){
+    if (isset($_POST['teacher_avatar'])){
+        $_SESSION['teacher_name'] = $_POST['teacher_name'];
+        $_SESSION['teacher_specialized'] = $_POST['teacher_specialized'];
+        $_SESSION['teacher_degree'] = $_POST['teacher_degree'];
+        $_SESSION['teacher_note'] = $_POST['teacher_note'];
+        $_SESSION['teacher_avatar'] = $_POST['teacher_avatar'];
 
+        header('Location:teacher_edit_input.php?edit_teacher='.$teacher_info['id']);
+    }
+    else{
+        $_SESSION['teacher_name'] = $_POST['teacher_name'];
+        $_SESSION['teacher_specialized'] = $_POST['teacher_specialized'];
+        $_SESSION['teacher_degree'] = $_POST['teacher_degree'];
+        $_SESSION['teacher_note'] = $_POST['teacher_note'];
+
+        header('Location:teacher_edit_input.php?edit_teacher='.$teacher_info['id']);
+    }
 }else{
     include '../views/teacher_edit_confirm.php';
 }

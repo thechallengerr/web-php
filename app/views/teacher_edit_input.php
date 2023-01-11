@@ -20,7 +20,15 @@
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="name">Họ và tên</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="name" name="teacher_name" value="<?= $teacher_info['name'];?>">
+                    <?php
+                    if (isset($_SESSION['teacher_name'])){
+                        $value_teacher_name = $_SESSION['teacher_name'];
+                    }
+                    else{
+                        $value_teacher_name = $teacher_info['name'];
+                    }
+                    ?>
+                    <input type="text" class="form-control" id="name" name="teacher_name" value="<?= $value_teacher_name;?>">
                     <span class="text-danger font-weight-bold">
                     <?php
                         echo isset($error['teacher_name_empty']) ? $error['teacher_name_empty'] : '';
@@ -37,9 +45,16 @@
                             <--- Chọn bộ môn --->
                         </option>
                         <?php
+                        if (isset($_SESSION['teacher_specialized'])){
+                            $key_teacher_specialized = $_SESSION['teacher_specialized'];
+                        }
+                        else{
+                            $key_teacher_specialized = $teacher_info['specialized'];
+                        }
+
                         $specialized = constant('SPECIALIZED');
                         foreach ($specialized as $key => $value){
-                            $selected = ($key == $teacher_info['specialized'] ? "selected" : "");
+                            $selected = ($key == $key_teacher_specialized ? "selected" : "");
                         ?>
                             <option <?php echo $selected; ?> value="<?=$key?>"><?= $value ?></option>
                         <?php
@@ -61,9 +76,16 @@
                             <--- Chọn học vị --->
                         </option>
                         <?php
+                        if (isset($_SESSION['teacher_degree'])){
+                            $key_teacher_degree = $_SESSION['teacher_degree'];
+                        }
+                        else{
+                            $key_teacher_degree = $teacher_info['degree'];
+                        }
+
                         $degree = constant('DEGREE');
                         foreach ($degree as $key => $value){
-                            $selected = ($key == $teacher_info['degree'] ? "selected" : "");
+                            $selected = ($key == $key_teacher_degree ? "selected" : "");
                         ?>
                             <option <?php echo $selected?> value="<?= $key ?>"> <?= $value ?> </option>
                         <?php
@@ -92,7 +114,18 @@
                         echo isset($error['teacher_avatar_empty']) ? $error['teacher_avatar_empty'] : '';
                         ?>
                     </span>
+                    <?php
+                    if (! isset($_SESSION['teacher_avatar'])){
+                    ?>
                         <img style=" height: 150px; width: 150px" src="../../assets/avatar/teacher/<?= $teacher_info['id'] . "/" . $teacher_info['avatar'] ?>" alt="Avatar">
+                    <?php
+                    }
+                    else{
+                        ?>
+                        <img style=" height: 150px; width: 150px" src="../../assets/avatar/tmp/<?= $_SESSION['teacher_avatar'];?>" alt="Avatar">
+                    <?php
+                    }
+                    ?>
                 </div>
 
             </div>
