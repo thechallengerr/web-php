@@ -15,46 +15,84 @@
     include '../common/navbar.php';
     ?>
     <div class="container">
-        <h1 class="text-center mt-5">Sửa thời khóa biểu</h1>
-        <form action="" method="post" class="mt-5 mb-5 border border-primary rounded p-5">
+        <h1 class="text-center mt-5">Sửa thông tin giáo viên</h1>
+        <form action="../controller/teacher_edit_input.php?edit_teacher=<?php echo $teacher_info['id'];?>" method="post" enctype="multipart/form-data" class="mt-5 mb-5 border border-primary rounded p-5">
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="name">Họ và tên</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="name" name="name">
+                    <input type="text" class="form-control" id="name" name="teacher_name" value="<?= $teacher_info['name'];?>">
+                    <span class="text-danger font-weight-bold">
+                    <?php
+                        echo isset($error['teacher_name_empty']) ? $error['teacher_name_empty'] : '';
+                        echo isset($error['teacher_name_length']) ? $error['teacher_name_length'] : '';
+                    ?>
+                    </span>
                 </div>
             </div>
             <div class="form-group row mt-4">
-                <label class="col-sm-2" for="subject">Bộ môn</label>
+                <label class="col-sm-2" for="teacher_specialized">Bộ môn</label>
                 <div class="col-sm-6">
-
-                    <select id="subject" class="form-control">
-                        <option selected>
+                    <select id="teacher_specialized" class="form-control" name="teacher_specialized">
+                        <option value="">
                             <--- Chọn bộ môn --->
                         </option>
-                        <option>...</option>
+                        <?php
+                        $specialized = constant('SPECIALIZED');
+                        foreach ($specialized as $key => $value){
+                            $selected = ($key == $teacher_info['specialized'] ? "selected" : "");
+                        ?>
+                            <option <?php echo $selected; ?> value="<?=$key?>"><?= $value ?></option>
+                        <?php
+                        }
+                        ?>
                     </select>
+                    <span class="text-danger font-weight-bold">
+                    <?php
+                        echo isset($error['teacher_specialized_empty']) ? $error['teacher_specialized_empty'] : '';
+                    ?>
+                    </span>
                 </div>
             </div>
             <div class="form-group row mt-4">
-                <label class="col-sm-2" for="hocvi">Học vị</label>
+                <label class="col-sm-2" for="teacher_degree">Học vị</label>
                 <div class="col-sm-6">
-                    <select id="hocvi" class="form-control">
-                        <option selected>
+                    <select id="teacher_degree" class="form-control" name="teacher_degree">
+                        <option <?php ?> value="">
                             <--- Chọn học vị --->
                         </option>
-                        <option>...</option>
+                        <?php
+                        $degree = constant('DEGREE');
+                        foreach ($degree as $key => $value){
+                            $selected = ($key == $teacher_info['degree'] ? "selected" : "");
+                        ?>
+                            <option <?php echo $selected?> value="<?= $key ?>"> <?= $value ?> </option>
+                        <?php
+                        }
+                        ?>
                     </select>
+                    <span class="text-danger font-weight-bold">
+                    <?php
+                        echo isset($error['teacher_degree_empty']) ? $error['teacher_degree_empty'] : '';
+                    ?>
+                    </span>
                 </div>
             </div>
             <div class="form-group row mt-4">
-                <label class="col-sm-2" for="file" class="form__label">
+                <label class="col-sm-2" for="teacher_avatar" class="form__label">
                     Avatar
                 </label>
                 <div class="col-sm-6">
                     <div class="input-group mb-3">
-                        <input type="file" class="form-control" id="file" name="subject_image" border-width>
-                        <!-- <label class="input-group-text" for="file">Browse</label> -->
+                        <input type="file" class="form-control" id="teacher_avatar" name="teacher_avatar" border-width>
+<!--                        <input type="hidden" id="teacher_avatar" name="updated_teacher_avatar" value="--><?//= $teacher_info['avatar'] ?><!--">-->
+
                     </div>
+                    <span class="text-danger font-weight-bold">
+                        <?php
+                        echo isset($error['teacher_avatar_empty']) ? $error['teacher_avatar_empty'] : '';
+                        ?>
+                    </span>
+                        <img style=" height: 150px; width: 150px" src="../../assets/avatar/teacher/<?= $teacher_info['id'] . "/" . $teacher_info['avatar'] ?>" alt="Avatar">
                 </div>
 
             </div>
@@ -62,11 +100,17 @@
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="note">Mô tả thêm</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" id="note" rows="5"></textarea>
+                    <textarea class="form-control" id="note" rows="5" name="teacher_note" ><?= $teacher_info['description']?></textarea>
+                    <span class="text-danger font-weight-bold">
+                    <?php
+                        echo isset($error['teacher_note_empty']) ? $error['teacher_note_empty'] : '';
+                        echo isset($error['teacher_note_length']) ? $error['teacher_note_length'] : '';
+                    ?>
+                    </span>
                 </div>
             </div>
             <div class="mt-5 d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5">Xác nhận</button>
+                <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5" name="teacher_edit_submit">Xác nhận</button>
             </div>
         </form>
 

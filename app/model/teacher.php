@@ -4,7 +4,6 @@ include_once "../common/database.php";
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 // CRUD
 
-
 function add_teacher($name, $specialized, $degree, $teacher_image, $note) //CREAT
 {
     global $connection;
@@ -96,4 +95,40 @@ function get_last_id(){
 
     return $last_id;
 }
+
+/**
+ * @param $id
+ * @return array|false|null
+ */
+function get_teacher_by_id($id)
+{
+    global $connection;
+
+    $sql  = "SELECT * FROM teachers WHERE teachers.id = $id  LIMIT 1";
+
+    $result = $connection->query($sql);
+    $teacher_info = mysqli_fetch_assoc($result);
+
+    return $teacher_info;
+}
+
+
+function edit_teacher_by_id($id, $teacher_name, $teacher_avatar, $teacher_note, $teacher_specialized, $teacher_degree)
+{
+    global $connection;
+
+    $date = date("Y-m-d H:i:s");
+    $sql = "UPDATE `teachers`
+            SET `name` = '{$teacher_name}',
+            `avatar` = '{$teacher_avatar}',
+            `description` = '{$teacher_note}',
+            `specialized` = '{$teacher_specialized}',
+            `degree` = '{$teacher_degree}',
+            `updated` = '{$date}'
+            WHERE `id` = '{$id}'";
+
+    $result = $connection->query($sql);
+    return $result;
+}
+
 ?>

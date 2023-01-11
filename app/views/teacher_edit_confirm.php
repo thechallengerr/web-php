@@ -16,58 +16,68 @@
     ?>
     <div class="container">
         <h1 class="text-center mt-5">Sửa thời khóa biểu</h1>
-        <form action="" method="post" class="mt-5 mb-5 border border-primary rounded p-5">
+        <form action="../controller/teacher_edit_confirm.php?edit_teacher=<?php echo $teacher_info['id'];?>" method="post" class="mt-5 mb-5 border border-primary rounded p-5">
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="name">Họ và tên</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="name" name="name">
+                    <input type="text" class="form-control" id="name" name="teacher_name" value="<?= $_SESSION['teacher_name']?>" readonly>
                 </div>
             </div>
             <div class="form-group row mt-4">
-                <label class="col-sm-2" for="subject">Bộ môn</label>
+                <label class="col-sm-2" for="teacher_specialized">Bộ môn</label>
                 <div class="col-sm-6">
-
-                    <select id="subject" class="form-control">
-                        <option selected>
-                            <--- Chọn bộ môn --->
-                        </option>
-                        <option>...</option>
-                    </select>
+                    <?php $specialized = constant('SPECIALIZED');?>
+                    <input type="text" class="form-control" id="teacher_specialized" name="teacher_specialized_visible" value="<?= $specialized[$_SESSION['teacher_specialized']]?>" readonly>
+                    <input type="hidden" id="teacher_specialized" name="teacher_specialized" value="<?=$_SESSION['teacher_specialized']?>">
                 </div>
             </div>
             <div class="form-group row mt-4">
-                <label class="col-sm-2" for="hocvi">Học vị</label>
+                <label class="col-sm-2" for="teacher_degree">Học vị</label>
                 <div class="col-sm-6">
-                    <select id="hocvi" class="form-control">
-                        <option selected>
-                            <--- Chọn học vị --->
-                        </option>
-                        <option>...</option>
-                    </select>
+                    <?php $degree = constant('DEGREE');?>
+                    <input type="text" class="form-control" id="teacher_degree" name="teacher_degree_visible" value="<?= $degree[$_SESSION['teacher_degree']]?>" readonly>
+                    <input type="hidden" id="teacher_degree" name="teacher_degree" value="<?=$_SESSION['teacher_degree']?>">
                 </div>
             </div>
+            <?php
+            if (empty($_SESSION['teacher_avatar'])){
+            ?>
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="file" class="form__label">
                     Avatar
                 </label>
                 <div class="col-sm-6">
                     <div class="input-group mb-3">
-                        <input type="file" class="form-control" id="file" name="subject_image" border-width>
-                        <!-- <label class="input-group-text" for="file">Browse</label> -->
+                        <img style=" height: 150px; width: 150px" src="../../assets/avatar/teacher/<?= $teacher_info['id']?>/<?= $teacher_info['avatar']?>" alt="avatar">
                     </div>
                 </div>
-
             </div>
-
+            <?php
+            }else{
+            ?>
+                <div class="form-group row mt-4">
+                    <label class="col-sm-2" for="file" class="form__label">
+                        Avatar
+                    </label>
+                    <div class="col-sm-6">
+                        <div class="input-group mb-3">
+                            <img style=" height: 150px; width: 150px" src="../../assets/avatar/tmp/<?= $_SESSION['teacher_avatar']?>"  alt="avatar">
+                            <input type="hidden" name="teacher_avatar" value="<?=$_SESSION['teacher_avatar']?>">
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="note">Mô tả thêm</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" id="note" rows="5"></textarea>
+                    <textarea class="form-control" id="note" name="teacher_note" rows="5" readonly><?= $_SESSION['teacher_note'];?></textarea>
                 </div>
             </div>
             <div class="mt-5 d-flex justify-content-around">
-                <button type="button" class="btn btn-primary btn-lg pe-5 ps-5">Sửa lại</button>
-                <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5">Đăng kí</button>
+                <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5" name="teacher_edit_fix">Sửa lại</button>
+                <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5" name="teacher_edit_confirm">Đăng kí</button>
             </div>
         </form>
 

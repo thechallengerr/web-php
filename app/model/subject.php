@@ -94,6 +94,9 @@ function delete_subject($id) //DELETE
     return true;
 }
 
+/**
+ * @return mixed
+ */
 function get_last_subject_id()
 {
     global $connection;
