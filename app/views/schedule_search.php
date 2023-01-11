@@ -90,20 +90,23 @@ include '../common/navbar.php';
                         <td><?php echo $arrs['week_day'] ?></td>
                         <td><?php echo $arrs['lession'] ?></td>
                         <td>
-                            <div class="manageOption d-flex">
                                 <form action="" method="POST">
+                            <div class="manageOption d-flex">
+
                                     <div class="manageOption--delete me-2">
                                         <button class="btn btn-primary deleteSchedule" name="deleteSchedule"
                                                 value=<?php echo $arrs['id'] ?>>Xoá
                                         </button>
                                     </div>
-                                </form>
-                                <div class="manageOption--edit">
+                                    <div class="manageOption--edit">
                                     <button class="btn btn-primary editSchedule" name="editSchedule"
                                             value=<?php echo $arrs['id'] ?>>Sửa
                                     </button>
                                 </div>
+                                
                             </div>
+                            </form>
+
                         </td>
                     </tr>
                 <?php }
@@ -135,8 +138,6 @@ include '../common/navbar.php';
     <?php } ?>
 
 </div>
-<script src="../../assets/js/jquery-3.6.1.min.js"></script>
-<script src="../../assets/js/schedule_search.js"></script>
 </body>
 
 </html>
