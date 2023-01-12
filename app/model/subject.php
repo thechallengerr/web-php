@@ -32,6 +32,18 @@ function get_all_subjects() //READ
     return $row;
 }
 
+function get_subject_name_by_id($id) //READ
+{
+    global $connection;
+
+    $sql  = "SELECT name FROM subjects WHERE id = '$id'";
+
+    $result = $connection->query($sql);
+    $row = mysqli_fetch_assoc($result);
+
+    return $row;
+}
+
 function search_subjects_by_year_and_keyword($school_year, $keyword) //READ
 {
     global $connection;
@@ -64,7 +76,7 @@ function search_subjects_by_keyword($keyword) //READ
     $sql  = "SELECT * FROM subjects WHERE subjects.name LIKE '%$keyword%' OR subjects.description LIKE '%$keyword%' ORDER BY subjects.id DESC";
 
     $result = $connection->query($sql);
-    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $row = mysqli_fetch_assoc($result);
 
     return $row;
 }

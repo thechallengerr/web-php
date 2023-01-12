@@ -16,12 +16,12 @@
     ?>
     <div class="container">
         <h1 class="text-center mt-5">Sửa thời khóa biểu</h1>
-        <form action="" method="post" class="mt-5 mb-5 border border-primary rounded p-5">
+        <form action="../controller/schedule_edit_confirm.php" method="POST" class="mt-5 mb-5 border border-primary rounded p-5">
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="year">Khóa học</label>
                 <div class="col-sm-6">
                     <?php
-                    echo '<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="' . $_SESSION['school_year'] . '">';
+                    echo '<input type="text" name="school_year" class="form-control-plaintext" value="' . $_SESSION['school_year'] . '">';
                     ?>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <div class="col-sm-6">
 
                     <?php
-                    echo '<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="' . $_SESSION['school_year'] . '">';
+                    echo '<input type="text" name="subject_id" class="form-control-plaintext" value="' . get_subject_name_by_id($_SESSION['subject_id'])['name'] . '">';
                     ?>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 <div class="col-sm-6">
 
                     <?php
-                    echo '<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="' . $_SESSION['school_year'] . '">';
+                    echo '<input type="text" name="teacher_id" class="form-control-plaintext" value="' . get_teacher_name_by_id($_SESSION['teacher_id'])['name'] . '">';
                     ?>
                 </div>
             </div>
@@ -49,23 +49,24 @@
                 <div class="col-sm-6">
 
                     <?php
-                    echo '<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="' . $_SESSION['week_day'] . '">';
+                    echo '<input type="text" name="week_day" class="form-control-plaintext" value="' . $_SESSION['week_day'] . '">';
                     ?>
                 </div>
             </div>
 
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="lession">Tiết</label>
-                <div class="col-sm-10 d-flex justify-content-between">
+                <div class="col-sm-10 d-flex">
                     <?php
-                    $lessions = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
-                    foreach ($lessions as $lession) {
-                        echo "<div class='form-check'>
-                                    <input class='form-check-input' type='checkbox' value='{$lession}' id='lession{$lession}'>
-                                    <label class='form-check-label' for='lession{$lession}''>
-                                    Tiết {$lession}
-                                    </label>
-                                </div>";
+
+                    $lessionArr = isset($_SESSION['lession']) ? $_SESSION['lession'] : explode(",", $schedule['lession']);
+                    foreach ($lessionArr as  $value) {
+                    ?>
+
+                        <p class='me-4' for='lession<?php echo $value; ?>'>
+                            Tiết <?php echo $value; ?>
+                        </p>
+                    <?php
                     }
                     ?>
 
@@ -76,7 +77,7 @@
                 <label class="col-sm-2" for="note">Chú ý</label>
                 <div class="col-sm-10">
                     <?php
-                    echo '<textarea class="form-control" id="note" rows="5">' . $_SESSION['school_year'] . '</textarea>';
+                    echo '<textarea name="notes" readonly class="form-control" id="note" rows="5">' . $_SESSION['notes'] . '</textarea>';
                     ?>
                 </div>
             </div>

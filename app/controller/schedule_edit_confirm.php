@@ -5,16 +5,22 @@ include_once "../model/teacher.php";
 include_once "../model/subject.php";
 include_once '../common/database.php';
 
-if (isset($_POST['edit_schedule'])) {
+$errors = array('school_year' => '', 'subject_id' => '', 'teacher_id' => '', 'week_day' => '', 'lession' => '', 'notes' => '');
+$school_year = $subject_id = $teacher_id = $week_day = $notes = '';
+$lessions = array();
+
+if (isset($_POST["edit_schedule"])) {
     $schedule_id = $_SESSION['schedule_id'];
-    $school_year = $_POST['school_year'];
-    $subject_id = $_POST['subject_id'];
-    $teacher_id = $_POST['teacher_id'];
-    $week_day = $_POST['week_day'];
-    $lession = $_POST['lession'];
-    $notes = $_POST['notes'];
-    edit_schedule($schedule_id, $school_year, $subject_id, $teacher_id, $weekday, $lession, $notes);
-    include_once "../views/schedule_edit_complete.php";
-} else if (isset($_POST['edit_again'])) {
-    include_once "../views/schedule_edit_input.php";
+    $school_year = $_SESSION['school_year'];
+    $subject_id = $_SESSION['subject_id'];
+    $teacher_id = $_SESSION['teacher_id'];
+    $week_day = $_SESSION['week_day'];
+    $lession = implode(',', $_SESSION['lession']);
+
+    $notes = $_SESSION['notes'];
+    if (edit_schedule($schedule_id, $school_year, $subject_id, $teacher_id, $week_day, $lession, $notes)) {
+        include_once "../views/schedule_edit_complete.php";
+    }
+} else {
+    include_once "../views/schedule_edit_confirm.php";
 }
