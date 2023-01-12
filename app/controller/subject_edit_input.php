@@ -32,6 +32,8 @@ if (isset($_POST['edit_subject'])) {
     } else {
         $data['subject_note'] = $_POST['subject_note'];
     }
+
+
     if (empty($_FILES['subject_avatar']['name'])) {
         // $data['subject_image']  = $subjectInfos['avatar'];
     } else {
@@ -50,6 +52,10 @@ if (isset($_POST['edit_subject'])) {
         // }
         $data['subject_image']  = $name;
     }
+
+
+
+
     if (!empty($_POST['subject_name']) && !empty($_POST['school_year']) && !empty($_POST['subject_note'])) {
         include_once '../views/subject_edit_confirm.php';
     } else {
