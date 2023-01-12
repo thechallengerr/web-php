@@ -5,9 +5,9 @@ include_once "../model/teacher.php";
 include_once '../common/database.php';
 include_once '../common/define.php';
 include_once 'common.php';
-if (isset($_POST['editSchedule'])){
-    $_SESSION['idEdit']=$_POST['editSchedule'];
-    header("Location:schedule_edit_input.php/id=".$_SESSION['idEdit']);
+if (isset($_POST['editSchedule'])) {
+    $_SESSION['idEdit'] = $_POST['editSchedule'];
+    header("Location:schedule_edit_input.php?id=" . $_SESSION['idEdit']);
 }
 if (isset($_POST['deleteSchedule'])) {
     $isToast = true;
@@ -27,4 +27,3 @@ if (isset($_POST['schedule_search'])) {
 $allSubject = get_all_subjects();
 $allTeacher = get_all_teachers();
 include_once "../views/schedule_search.php";
-
