@@ -112,19 +112,19 @@ include '../controller/schedule_add_input.php'
 
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="lession">Tiết</label>
-                <div class="col-sm-10 d-flex justify-content-between">
+                <div class="col-sm-10 d-flex justify-content-between"> 
                     <?php
                     $lessions = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
                     foreach ($lessions as $lession) { ?>
-                        <div class='form-check'>
+                         <div class='form-check'>
                             <input class='form-check-input' type='checkbox' value='<?php echo $lession; ?>' id='lession<?php echo $lession; ?>' name='lession'>
                             <label class='form-check-label' for='lession<?php echo $lession; ?>''>
                                 Tiết <?php echo $lession; ?>
                             </label>
                         </div>
-                        <?php
-                    }
-                    if (isset($errorsMissing['lession'])) { ?>
+                        <?php 
+                            }
+                            if (isset($errorsMissing['lession'])) { ?>
                                 <span class="text-danger font-weight-bold">
                                     <b><?php echo $errorsMissing['lession']; ?></b>
                                 </span>
