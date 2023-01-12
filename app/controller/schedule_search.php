@@ -16,11 +16,11 @@ if (isset($_POST['deleteSchedule'])) {
 if (isset($_POST['confirmDelete'])) {
     deleteSchedule($_SESSION['idDelete']);
 }
-if (isset($_POST['schedule_search'])) {
-    $school_year = $_POST['school_year'];
-    $subject_name = $_POST['subject_name'];
-    $teacher_name = $_POST['teacher_name'];
-    $scheduleResult = scheduleSearch($school_year, $subject_name, $teacher_name);
+if (isset($_GET['schedule_search'])) {
+    $_SESSION['school_year'] = $_GET['school_year'];
+    $_SESSION['subject_name'] = $_GET['subject_name'];
+    $_SESSION['teacher_name']= $_GET['teacher_name'];
+    $scheduleResult= scheduleSearch( $_SESSION['school_year'],$_SESSION['subject_name'], $_SESSION['teacher_name']);
 } else {
     $allSchedule = getAllSchedule();
 }
