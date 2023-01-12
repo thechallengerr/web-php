@@ -29,7 +29,7 @@ include("../common/define.php");
 
                     <select id="school_year" class="form-control" name="school_year">
                         <option <?php empty($_SESSION['school_year']) ? "selected" : "" ?> value="">
-                            <--- Chọn năm học--->
+                            Chọn năm học
                         </option>
                         <?php
                         $school_year = constant('YEAR');
@@ -49,13 +49,13 @@ include("../common/define.php");
                     </span>
                 </div>
             </div>
-            <div class="form-group row mt-4">
+            <div class=" row mt-4">
                 <label class="col-sm-2" for="subject">Môn học</label>
                 <div class="col-sm-6">
 
                     <select name="subject_id" id="subject" class="form-control">
                         <option <?php empty($_SESSION['subject_id']) ? "selected" : "" ?> value="">
-                            <--- Chọn môn học --->
+                            Chọn môn học
                         </option>
 
                         <?php
@@ -77,12 +77,12 @@ include("../common/define.php");
                     </span>
                 </div>
             </div>
-            <div class="form-group row mt-4">
+            <div class=" row mt-4">
                 <label class="col-sm-2" for="teacher">Giáo viên</label>
                 <div class="col-sm-6">
                     <select name="teacher_id" id="teacher" class="form-control">
                         <option value="">
-                            <--- Chọn giáo viên --->
+                            Chọn giáo viên
                         </option>
 
                         <?php
@@ -104,13 +104,13 @@ include("../common/define.php");
                 </div>
             </div>
 
-            <div class="form-group row mt-4">
+            <div class=" row mt-4">
                 <label class="col-sm-2" for="weekday">Thứ</label>
                 <div class="col-sm-6">
 
                     <select id="school_year" class="form-control" name="week_day">
                         <option <?php empty($_SESSION['week_day']) ? "selected" : "" ?> value="">
-                            <--- Chọn Thứ--->
+                            Chọn Thứ
                         </option>
                         <?php
                         $weekday = constant('WEEKDAY');
@@ -130,7 +130,7 @@ include("../common/define.php");
                 </div>
             </div>
 
-            <div class="form-group row mt-4">
+            <div class=" row mt-4">
                 <label class="col-sm-2" for="lession">Tiết</label>
                 <div class="col-sm-10 d-flex justify-content-between flex-column">
                     <div class="d-flex">
@@ -160,7 +160,7 @@ include("../common/define.php");
                 </div>
             </div>
 
-            <div class="form-group row mt-4">
+            <div class=" row mt-4">
                 <label class="col-sm-2" for="notes">Chú ý</label>
                 <div class="col-sm-10">
                     <textarea class="form-control" id="notes" name="notes" rows="5"><?php echo isset($_SESSION['notes']) ? $_SESSION['notes'] : $schedule["notes"] ?></textarea>

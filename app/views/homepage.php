@@ -65,7 +65,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item list-group-item-custom">
-                            <a href="ScheduleController.php">Tìm kiếm</a>
+                            <a href="schedule_search.php">Tìm kiếm</a>
                         </li>
                         <li class="list-group-item list-group-item-custom">
                             <a href="schedule_edit_input.php">Thêm mới</a>
