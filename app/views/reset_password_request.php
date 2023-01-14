@@ -68,33 +68,30 @@
         <div class="col-md-12 col-12 col-lg-6 right ">
             <div class="shadow-md">
                 <div class="row m-5 body-screen ">
-                    <form action="login.php" method="post" class="body m-3 p-3">
-                        <h3 class="text-center mt-3">Đăng nhập</h3>
+                    <form action="reset_password_request.php" method="post" class="body m-3 p-3">
+                        <h3 class="text-center mt-3">Yêu cầu đặt lại mật khẩu</h3>
                         <div class="form-group">
                             <input class="form-control form-control-lg" placeholder="Người dùng" type="text" name="login_id" class="input-label" placeholder="" autofocus value="<?php echo isset($_POST["login_id"]) ? $_POST["login_id"] : ''; ?>">
                         </div>
-                        <div class="">
+                        <div class="my-2">
                             <label style="color: red">
                                 <?php
-                                echo $errors['login_id'];
-                                ?>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control form-control-lg" placeholder="**********" type="password" name="password" class="input-label" value="<?php echo isset($_POST["password"]) ? $_POST["password"] : ''; ?>">
-                        </div>
-                        <div class="">
-                            <label style="color: red">
-                                <?php
-                                echo $errors['password'];
+                                if(!empty($errors['login_id'])) {
+                                    echo $errors['login_id'] . "</br>";
+                                }
+                                if (!empty($errors['strlen'])) {
+                                    echo $errors['strlen'] . "</br>";
+                                }
+                                if (!empty($errors['exist'])) {
+                                    echo $errors['exist'] . "</br>";
+                                }
                                 ?>
                             </label>
                         </div>
                         <!-- forget password -->
                         <div class="form-group">
-                            <a href="reset_password_request.php" class="float-right mb-4 pb-4">Quên mật khẩu</a>
-                            <div class="form-group mt-3">
-                                <button type="submit" name="submit" class="btn btn-primary btn-block btn-lg">Đăng nhập</button>
+                            <div class="form-group ">
+                                <button type="submit" name="submit" class="btn btn-primary btn-block btn-lg">Gửi yêu cầu reset password</button>
                             </div>
                     </form>
                 </div>
