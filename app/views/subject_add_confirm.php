@@ -14,7 +14,7 @@
 <?php
 include '../common/navbar.php';
 include '../common/define.php';
-session_start();
+
 ?>
 <div class="container">
     <h1 class="text-center my-3">Xác nhận thêm mới môn học</h1>

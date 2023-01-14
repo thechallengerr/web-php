@@ -28,18 +28,20 @@ if (isset($_POST['confirm_subject_add'])){
         $file_path_to = "../../assets/avatar/subject/{$last_subject_id}/{$subject_avatar}";
         copy($file_path_from, $file_path_to);
         if (unlink($file_path_from)){
+
             unset($_SESSION['subject_name']);
             unset($_SESSION['school_year']);
             unset($_SESSION['subject_note']);
             unset($_SESSION['subject_avatar']);
-            include '../views/subject_add_complete.php';
+
+            header('Location:subject_add_complete.php');
         }
     }
     else{
         include '../views/subject_add_input.php';
     }
 }else{
-    include_once "../views/subject_add_input.php";
+    include_once "../views/subject_add_confirm.php";
 }
 
 ?>
