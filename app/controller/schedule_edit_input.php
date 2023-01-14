@@ -20,9 +20,7 @@ function checkData($data)
 }
 $teachers = get_all_teachers();
 $subjects = get_all_subjects();
-// foreach($subjects as $subject){
-//     echo $subject["name"];
-// }
+
 if (isset($_POST['confirm_edit'])) {
     if (empty($_POST['school_year'])) {
         $errors['school_year'] = "Hãy chọn năm học";
