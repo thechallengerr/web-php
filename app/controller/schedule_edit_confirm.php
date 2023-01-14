@@ -19,6 +19,13 @@ if (isset($_POST["edit_schedule"])) {
 
     $notes = $_SESSION['notes'];
     if (edit_schedule($schedule_id, $school_year, $subject_id, $teacher_id, $week_day, $lession, $notes)) {
+        unset($_SESSION['school_year']);
+        unset($_SESSION['subject_id']);
+        unset($_SESSION['teacher_id']);
+        unset($_SESSION['week_day']);
+        unset($_SESSION['lession']);
+        unset($_SESSION['notes']);
+        unset($_SESSION['schedule_id']);
         include_once "../views/schedule_edit_complete.php";
     }
 } else {
