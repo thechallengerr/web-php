@@ -1,14 +1,3 @@
-<?php
-ini_set('error_reporting', 0);
-ini_set('display_errors', 0);
-
-include("../common/database.php");
-include("../common/define.php");
-include '../controller/schedule_add_input.php';
-// include '../controller/common.php';
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,22 +13,21 @@ session_start();
 
     <div class="container">
         <h1 class="text-center mt-5">Tạo thời khóa biểu</h1>
-        <form action="schedule_add_input.php" method="post" class="mt-5 mb-5 border border-primary rounded p-5">
+        <form action="../controller/schedule_add_input.php" method="post" class="mt-5 mb-5 border border-primary rounded p-5">
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="year">Khóa học</label>
                 <div class="col-sm-6">
 
-                    <select name="school_year" class="form-control">
-
+                    <select id="year" name="school_year" class="form-control">
                         <option <?php empty($_SESSION['school_year']) ? "selected" : "" ?> value="">
                             <--- Chọn năm học--->
                         </option>
                         <?php
                         $school_year = constant('YEAR');
                         foreach ($school_year as $key => $value) {
-                            $selected = ("");
+                            $selected = ($key == $_SESSION['school_year'] ? "selected" : " ");
                         ?>
-                            <option <?php echo $selected; ?> value="<?php echo $key ?>"><?php echo $value ?></option>
+                            <option <?php echo $selected?>  value="<?=  $key ?>"><?= $value ?></option>
                             <?php
                         }
                         ?>
@@ -52,42 +40,42 @@ session_start();
                 </div>
             </div>
             <div class="form-group row mt-4">
-                <label class="col-sm-2" for="subject">Môn học</label>
+                <label class="col-sm-2" for="schedule_subject">Môn học</label>
                 <div class="col-sm-6">
-                    <select name="subject_id" id="subject" class="form-control">
+                    <select name="subject_id" id="schedule_subject" class="form-control">
                         <option <?php empty($_SESSION['subject_id']) ? "selected" : "" ?> value="">
                             <--- Chọn môn học --->
                         </option>
                         <?php
-                        
-                        if (isset($subjects)) {
-                            foreach ($subjects as $subject) {
-                                $selected = (isset($_SESSION['subject_id']) && $subject["id"] == $_SESSION['subject_id'] ? "selected" : "");
-                                echo '<option  ' . $selected . 'value="' . $subject["id"] . '">' . $subject["name"] .'</option>';
-                            }
+                        foreach ($subjects as $subject) {
+                            $selected = ($subject['id'] == $_SESSION['subject_id']? "selected" : "");
+                        ?>
+                            <option <?php echo $selected?> value="<?= $subject['id']?>"> <?= $subject['name']?></option>
+                        <?php
                         }
                         ?>
                     </select>
-                    <?php if (isset($errorsMissing['subject'])) { ?>
+                    <?php
+                    if (isset($errorsMissing['subject_id'])) { ?>
                         <span class="text-danger font-weight-bold">
-                            <b><?php echo $errorsMissing['subject']; ?></b>
+                            <b><?php echo $errorsMissing['subject_id']; ?></b>
                         </span>
                     <?php } ?>
                 </div>
             </div>
             <div class="form-group row mt-4">
-                <label class="col-sm-2" for="teacher">Giáo viên</label>
+                <label class="col-sm-2" for="schedule_teacher">Giáo viên</label>
                 <div class="col-sm-6">
-                    <select name="teacher_id" id="teacher" class="form-control">
+                    <select name="teacher_id" id="schedule_teacher" class="form-control">
                         <option <?php empty($_SESSION['teacher_id']) ? "selected" : "" ?> value="">
                             <--- Chọn giáo viên --->
                         </option>
                         <?php
-                        if (isset($teachers)) {
-                            foreach ($teachers as $teacher) {
-                                $selected = (isset( $_SESSION['teacher_id']) && $teacher["id"] == $_SESSION['teacher_id'] ? "selected" : "");
-                                echo '<option ' .$selected. 'value="' . $teacher["id"] . '">' . $teacher["name"] . '</option>';
-                            }
+                        foreach ($teachers as $teacher) {
+                            $selected = ( $teacher['id'] == $_SESSION['teacher_id']? "selected" : "");
+                        ?>
+                            <option <?php echo $selected?> value="<?= $teacher['id']?>"> <?= $teacher['name']?></option>
+                            <?php
                         }
                         ?>
                     </select>
@@ -104,15 +92,15 @@ session_start();
                 <div class="col-sm-6">
 
                     <select id="weekday" name="week_day" class="form-control">
-                        <option <?php empty($_SESSION['week_day']) ? "selected" : "" ?> value="">
+                        <option  <?php empty($_SESSION['week_day']) ? "selected" : "" ?> value="">
                                 <--- Chọn lịch học--->
                         </option>
                         <?php
                         $week_day = constant('WEEKDAY');
                         foreach ($week_day as $key => $value) {
-                            $selected = ($key == $_SESSION['week_day'] ? "selected" : "");
+                            $selected = ($value == $_SESSION['week_day'] ? "selected" : "");
                         ?>
-                            <option <?php echo $selected; ?> value="<?= $key ?>"><?= $value ?></option>
+                            <option <?php echo $selected; ?> value="<?= $value ?>"><?= $value ?></option>
                             <?php
                         }
                         ?>
@@ -128,24 +116,27 @@ session_start();
 
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="lession">Tiết</label>
-                <div class="col-sm-10 d-flex justify-content-between"> 
+                <div class="col-sm-10 d-flex justify-content-between">
                     <?php
                     $lessions = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
-                    foreach ($lessions as $lession) { ?>
+                    foreach ($lessions as $lession) {
+                        $checked = (in_array($lession, $_SESSION['lession']) ? "checked" : "");
+                        ?>
                          <div class='form-check'>
-                            <input class='form-check-input' type='checkbox' value='<?php echo $lession; ?>' id='lession<?php echo $lession; ?>' name='lession[]'>
+                            <input class='form-check-input' id="lession" type='checkbox' value="<?=$lession?>" name="lession[]" <?php echo $checked?>>
                             <label class='form-check-label' for='lession<?php echo $lession; ?>''>
                                 Tiết <?php echo $lession; ?>
                             </label>
                         </div>
-                        <?php 
+                        <?php
                             }
-                            if (isset($errorsMissing['lession'])) { ?>
-                                <span class="text-danger font-weight-bold">
+                    if (isset($errorsMissing['lession'])) { ?>
+                        <span class="text-danger font-weight-bold">
                                     <b><?php echo $errorsMissing['lession']; ?></b>
                                 </span>
-                            <?php } ?>
-
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
 

@@ -3,6 +3,7 @@
 include '../common/database.php'; // database kết nối -> bắt buộc mọi controller phải có dòng này
 include '../model/subject.php';
 include '../model/teacher.php';
+include '../common/define.php';
 session_start();
 
 $subjects = get_all_subjects();
@@ -11,11 +12,14 @@ $teachers = get_all_teachers();
 $errorsMissing = [];
 
 if (isset($_POST['confirm_submit'])) {
+
     $school_year = $_POST['school_year'];
     $subject_id = $_POST['subject_id'];
     $teacher_id = $_POST['teacher_id'];
     $week_day = $_POST['week_day'];
-    $lession = $_POST['lession'];
+    if (isset($_POST['lession'])){
+        $lession = $_POST['lession'];
+    }
     $notes = $_POST['notes'];
 
     if (empty($school_year)) {
@@ -45,8 +49,11 @@ if (isset($_POST['confirm_submit'])) {
         $_SESSION['lession'] = $lession;
         $_SESSION['notes'] = $notes;
 
-        header('Location: ./schedule_add_confirm.php?school_year=' . $school_year . '&subject_id=' . $subject_id . '&teacher_id=' . $teacher_id . '&week_day=' . $week_day . '&lession=' .  $_SESSION['lession'] . '&note=' . $notes);
+        header('Location: schedule_add_confirm.php');
     } else {
         include_once "../views/schedule_add_input.php";
     }
+}
+else{
+    include '../views/schedule_add_input.php';
 }

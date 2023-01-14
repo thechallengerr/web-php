@@ -1,10 +1,3 @@
-<?php
-include("../common/database.php");
-include("../common/define.php");
-// include '../controller/common.php';
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,62 +17,66 @@ session_start();
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="year">Khóa học</label>
                 <div class="col-sm-6">
-                    <?php $school_year = constant('YEAR'); ?>
-                    <input class="form-control" id="school_year" name="school_year_visible" value="<?php echo $school_year[$_GET['school_year']]; ?>" readonly>
+                    <?php $school_year = constant('YEAR')?>
+                    <input class="form-control" id="school_year" name="school_year_visible" value="<?=  $school_year[$_SESSION['school_year']]; ?>" readonly>
 
                 </div>
             </div>
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="subject">Môn học</label>
                 <div class="col-sm-6">
-                    <?php $subject_id = constant('SUBJECT'); ?>
-                    <input class="form-control" id="subject_id" name="subject_id" value="<?php echo $subject_id[$_GET['subject_id']]; ?>" readonly>
+                    <?php foreach ($subjects as $subject){
+                            if ($subject['id'] == $_SESSION['subject_id']){?>
+                                <input class="form-control" id="subject" name="subject_id" value="<?= $subject['name']; ?>" readonly>
+                    <?php
+                            }
+                    }
+                    ?>
                 </div>
             </div>
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="teacher">Giáo viên</label>
                 <div class="col-sm-6">
-                    <?php $teacher_id = constant('TEACHER'); ?>
-                    <input class="form-control" id="teacher_id" name="teacher_id" value="<?php echo $teacher_id[$_GET['teacher_id']]; ?>" readonly>
+                    <?php foreach ($teachers as $teacher){
+                        if ($teacher['id'] == $_SESSION['teacher_id']){?>
+                            <input class="form-control" id="teacher" name="teacher_id" value="<?= $teacher['name']; ?>" readonly>
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
             </div>
 
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="weekday">Thứ</label>
                 <div class="col-sm-6">
-                    <?php $week_day = constant('WEEKDAY'); ?>
-                    <input class="form-control" id="lession" name="week_day_visible" value="<?php echo $week_day[$_GET['week_day']]; ?>" readonly>
-                    <input class="form-control" type="hidden" id="week_day" name="week_day" value="<?php echo $week_day[$_GET['week_day']]; ?>">
-
+                    <input class="form-control" id="lession" name="week_day_visible" value=" <?= $_SESSION['week_day']; ?>" readonly>
                 </div>
             </div>
 
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="lession">Tiết</label>
-                <div class="col-sm-10 d-flex justify-content-between">
+                <div class="col-sm-10 d-flex ">
                     <?php
-                    // $lessions = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
-                    $lession = constant('LESSION');
+                    foreach ($_SESSION['lession'] as $key => $value){
                     ?>
-                    <input class="form-control" id="lession" name="lession_visible" value="<?php 
-                    foreach ($_SESSION['lession'] as $l) {
-                        echo $lession[$l]." ";
-                    } ?>" readonly>
-                    <input class="form-control" type="hidden" id="lession" name="lession" value="<?php foreach ($_SESSION['lession'] as $l) {
-                        echo $lession[$l]." ";} ?>">
+                    <p class='me-4' >
+                        Tiết <?= $value; ?>
+                    </p>
+                    <?php
+                    } ?>
                 </div>
             </div>
 
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="note">Chú ý</label>
                 <div class="col-sm-10">
-                    <?php $week_day = constant('WEEKDAY'); ?>
-                    <textarea class="form-control" id="notes" rows="5" name="notes" readonly><?php echo  $notes[$_GET['notes']]; ?></textarea>
+                    <textarea class="form-control" id="notes" rows="5" name="notes" readonly><?=  $_SESSION['notes']; ?></textarea>
 
                 </div>
             </div>
             <div class="mt-5 d-flex justify-content-around">
-                <button type="submit" name="confirm_edit" class="btn btn-primary btn-lg pe-5 ps-5">Sửa lại</button>
+                <a href="../controller/schedule_add_input.php" class="btn btn-primary btn-lg pe-5 ps-5">Sửa lại</a>
                 <button type="submit" class="btn btn-primary btn-lg pe-5 ps-5" name="confirm_add">Đăng kí</button>
             </div>
         </form>

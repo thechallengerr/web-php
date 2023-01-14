@@ -68,7 +68,7 @@
                             <a href="schedule_search.php">Tìm kiếm</a>
                         </li>
                         <li class="list-group-item list-group-item-custom">
-                            <a href="schedule_edit_input.php">Thêm mới</a>
+                            <a href="schedule_add_input.php">Thêm mới</a>
                         </li>
                     </ul>
                 </div>
