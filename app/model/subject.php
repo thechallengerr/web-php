@@ -8,8 +8,9 @@ function add_subject($subject_name, $school_year, $subject_note, $subject_avatar
 {
     global $connection;
 
-    $sql = "INSERT INTO subjects (name, avatar, description, school_year)
-VALUES ('{$subject_name}', '{$subject_avatar}', '{$subject_note}', '{$school_year}')";
+    $date = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO subjects (name, avatar, description, school_year, created)
+    VALUES ('{$subject_name}', '{$subject_avatar}', '{$subject_note}', '{$school_year}', '{$date}')";
 
     $result = $connection->query($sql);
     return $result;
