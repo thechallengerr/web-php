@@ -2,13 +2,8 @@
 include_once "../common/database.php";
 // CRUD
 
-/**
- * @param $subject_name
- * @param $school_year
- * @param $subject_note
- * @param $subject_avatar
- * @return bool|mysqli_result
- */
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+
 function add_subject($subject_name, $school_year, $subject_note, $subject_avatar) //CREAT
 {
     global $connection;
@@ -73,11 +68,14 @@ function edit_subject($id, $subject_name, $subject_year, $subject_note, $subject
 {
     global $connection;
 
+    $date = date("Y-m-d H:i:s");
+
     $sql = "UPDATE subjects
             SET name = '$subject_name',
             avatar = '$subject_avatar',
             description = '$subject_note',
-            school_year = '$subject_year'
+            school_year = '$subject_year',
+            updated = '$date'
             WHERE id = $id";
     $connection->query($sql);
     return true;
@@ -106,7 +104,7 @@ function get_last_subject_id()
     return $last_id;
 }
 
-function get_by_subject_id($id) //READ
+function get_subject_by_id($id) //READ
 {
     global $connection;
 
