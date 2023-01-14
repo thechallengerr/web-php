@@ -1,5 +1,9 @@
-RewriteEngine on
-Options +FollowSymlinks
-# Options -Indexes
+Options +FollowSymLinks -MultiViews
+# Turn mod_rewrite on
+RewriteEngine On
 RewriteBase /
-RewriteRule ^post/([a-zA-Z\.\-\_0-9]+)-([0-9]+).html$ post.php?title=$1&id=$2 [L]
+
+## To internally redirect /dir/foo to /dir/foo.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+RewriteRule ^(.+?)/?$ $1.php [L]
