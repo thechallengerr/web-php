@@ -6,8 +6,6 @@ include '../common/define.php';
 
 $subjectInfos = get_subject_by_id($_GET['edit_subject']);
 
-echo empty($_SESSION['subject_avatar']) ? "không có cái ảnh nào cả" : $_SESSION['subject_avatar'];
-
 if (isset($_POST['subject_edit_confirm'])) {
     $subject_name = $_POST['subject_name'];
     $school_year = $_POST['school_year'];

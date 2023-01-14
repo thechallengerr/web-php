@@ -22,7 +22,11 @@ if (isset($_POST['edit_subject'])) {
     // kiem tra
     if (empty($_POST['subject_name'])) {
         $errorsMissing['subject_name'] = "Hãy nhập tên môn học";
-    } else {
+    } 
+    elseif (strlen($_POST['subject_name']) > 100) {
+        $errorsMissing['subject_name'] = "Không nhập quá 100 kí tự";
+    }
+    else {
         $data['subject_name'] = $_POST['subject_name'];
     }
     if (empty($_POST['school_year'])) {
@@ -32,7 +36,11 @@ if (isset($_POST['edit_subject'])) {
     }
     if (empty($_POST['subject_note'])) {
         $errorsMissing['subject_note'] = "Hãy nhập mô tả";
-    } else {
+    } 
+    elseif (strlen($_POST['subject_note']) > 1000) {
+        $errorsMissing['subject_note'] = "Không nhập quá 1000 kí tự";
+    }
+    else {
         $data['subject_note'] = $_POST['subject_note'];
     }
 
