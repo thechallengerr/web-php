@@ -29,16 +29,16 @@ include("../common/define.php");
 
                     <select id="school_year" class="form-control" name="school_year">
                         <option <?php empty($_SESSION['school_year']) ? "selected" : "" ?> value="">
-                            Chọn năm họ
+                            Chọn năm học
                         </option>
                         <?php
                         $school_year = constant('YEAR');
                         $schedule_schoolyear = (isset($_SESSION['school_year'])) ? $_SESSION['school_year'] : $schedule['school_year'];
 
                         foreach ($school_year as $key => $value) {
-                            $selected = ($value == $schedule_schoolyear ? "selected" : "");
+                            $selected = ($key == $schedule_schoolyear ? "selected" : "");
                         ?>
-                            <option <?php echo $selected; ?> value="<?= $value ?>"><?= $value ?></option>
+                            <option <?php echo $selected; ?> value="<?= $key ?>"><?= $value ?></option>
                         <?php
                         }
                         ?>

@@ -59,7 +59,7 @@ function get_all_schedules() //READ
     $sql  = "SELECT * FROM `schedules`";
 
     $result = $connection->query($sql);
-    $row = $result->fetch_array(MYSQLI_ASSOC);
+    $row = mysqli_fetch_assoc($result);
 
     return $row;
 }

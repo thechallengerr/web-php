@@ -5,8 +5,9 @@ include_once "../model/teacher.php";
 include_once "../model/subject.php";
 include_once '../common/database.php';
 
+echo $_GET["id"];
 $_SESSION["schedule_id"] = $_GET["id"];
-$schedule = get_schedule_by_id($_SESSION["schedule_id"]);
+$schedule = get_schedule_by_id($_GET["id"]);
 $errors = array('school_year' => '', 'subject_id' => '', 'teacher_id' => '', 'week_day' => '', 'lession' => '', 'notes' => '');
 $school_year = $subject_id = $teacher_id = $week_day = $notes = '';
 $lessions = array();
@@ -20,9 +21,7 @@ function checkData($data)
 }
 $teachers = get_all_teachers();
 $subjects = get_all_subjects();
-// foreach($subjects as $subject){
-//     echo $subject["name"];
-// }
+
 if (isset($_POST['confirm_edit'])) {
     if (empty($_POST['school_year'])) {
         $errors['school_year'] = "Hãy chọn năm học";
