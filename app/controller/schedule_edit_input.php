@@ -5,8 +5,9 @@ include_once "../model/teacher.php";
 include_once "../model/subject.php";
 include_once '../common/database.php';
 
+echo $_GET["id"];
 $_SESSION["schedule_id"] = $_GET["id"];
-$schedule = get_schedule_by_id($_SESSION["schedule_id"]);
+$schedule = get_schedule_by_id($_GET["id"]);
 $errors = array('school_year' => '', 'subject_id' => '', 'teacher_id' => '', 'week_day' => '', 'lession' => '', 'notes' => '');
 $school_year = $subject_id = $teacher_id = $week_day = $notes = '';
 $lessions = array();

@@ -36,7 +36,7 @@ include("../common/define.php");
                         $schedule_schoolyear = (isset($_SESSION['school_year'])) ? $_SESSION['school_year'] : $schedule['school_year'];
 
                         foreach ($school_year as $key => $value) {
-                            $selected = ($value == $schedule_schoolyear ? "selected" : "");
+                            $selected = ($key == $schedule_schoolyear ? "selected" : "");
                         ?>
                             <option <?php echo $selected; ?> value="<?= $key ?>"><?= $value ?></option>
                         <?php
