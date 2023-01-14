@@ -68,7 +68,19 @@
                             <a href="schedule_search.php">Tìm kiếm</a>
                         </li>
                         <li class="list-group-item list-group-item-custom">
-                            <a href="schedule_edit_input.php">Thêm mới</a>
+                            <a href="schedule_add_input.php">Thêm mới</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-4 mt-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h5>Admin</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item list-group-item-custom">
+                            <a href="reset_password_reset.php">Yêu cầu reset password</a>
                         </li>
                     </ul>
                 </div>
