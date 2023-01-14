@@ -45,8 +45,9 @@ function add_schedule($params) //CREAT
 {
     global $connection;
 
-    $sql  = "INSERT INTO `schedules` (school_year, subject_id, teacher_id, week_day, lession, notes) 
-    VALUES ('{$params['school_year']}','{$params['subject_id']}','{$params['teacher_id']}','{$params['week_day']}','{$params['lession']}','{$params['notes']}')";
+    $date = date("Y-m-d H:i:s");
+    $sql  = "INSERT INTO `schedules` (school_year, subject_id, teacher_id, week_day, lession, notes, created) 
+    VALUES ('{$params['school_year']}','{$params['subject_id']}','{$params['teacher_id']}','{$params['week_day']}','{$params['lession']}','{$params['notes']}','$date')";
     $result = $connection->query($sql);
 
     return $result;
