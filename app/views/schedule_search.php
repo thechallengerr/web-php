@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,31 +20,31 @@ include '../common/navbar.php';
 <div class="container-fluid">
     <div class="scheduleSearch">
         <div class="scheduleForm">
-            <form method="POST">
+            <form method="GET">
 
                 <div class="scheduleForm--wrap d-flex col-8">
                     <div class="scheduleForm--wrap__label col-4"><label for="">Khoá</label></div>
                     <select name="school_year" id="school_year" class="col-8">
                     <?php foreach (constant("YEAR") as $key => $value) { ?>
-                                <option><?php echo $value; ?></option>
+                        <option value='<?php echo $key ?>' <?php echo isset( $_SESSION['school_year'] ) ? ( $_SESSION['school_year'] ==$key? "selected" :"") :"" ?>><?php echo $value ?></option>
                             <?php } ?>
                     </select>
                 </div>
                 <div class="scheduleForm--wrap d-flex col-8">
                     <div class="scheduleForm--wrap__label col-4"><label for="">Môn học</label></div>
                     <select name="subject_name" id="subject_name" class="col-8">
-                        <?php foreach ($allSubject as $subject) {
-                            echo "<option value='$subject[name]'>{$subject['name']}</option>";
-                        } ?>
+                        <?php foreach ($allSubject as $subject) { ?>
+                            <option value='<?php echo $subject['name'] ?>' <?php echo isset( $_SESSION['subject_name'] ) ? ( $_SESSION['subject_name'] ==$subject['name']? "selected" :"") :"" ?>><?php echo $subject['name'] ?></option>
+                       <?php } ?>
 
                     </select>
                 </div>
                 <div class="scheduleForm--wrap col-8 d-flex">
                     <div class="scheduleForm--wrap__label col-4"><label for="">Giáo viên</label></div>
                     <select name="teacher_name"  id="" class="col-8">
-                        <?php foreach ($allTeacher as $teacher) {
-                            echo "<option value='$teacher[name]'>{$teacher['name']}</option>";
-                        } ?>
+                        <?php foreach ($allTeacher as $teacher) { ?>
+                            <option value='<?php echo $teacher['name'] ?>' <?php echo isset($_SESSION['teacher_name']) ? ($_SESSION['teacher_name']==$teacher['name']? "selected" :"") :"" ?>><?php echo $teacher['name'] ?></option>
+                       <?php } ?>
                     </select>
                 </div>
                 <div class="scheduleForm--wrap d-flex col-8">
@@ -84,7 +85,7 @@ include '../common/navbar.php';
 
                     <tr>
                         <th scope="row" class="idSchedule"><?php echo $count += 1 ?></th>
-                        <td> <?php echo $arrs['school_year'] ?></td>
+                        <td> <?php echo constant('YEAR')[$arrs['school_year']]; ?></td>
                         <td><?php echo $arrs['subject_name'] ?></td>
                         <td><?php echo $arrs['name'] ?></td>
                         <td><?php echo $arrs['week_day'] ?></td>

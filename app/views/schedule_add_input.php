@@ -1,7 +1,12 @@
 <?php
+ini_set('error_reporting', 0);
+ini_set('display_errors', 0);
+
 include("../common/database.php");
 include("../common/define.php");
-include '../controller/schedule_add_input.php'
+include '../controller/schedule_add_input.php';
+// include '../controller/common.php';
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -26,13 +31,18 @@ include '../controller/schedule_add_input.php'
 
                     <select name="school_year" class="form-control">
 
-                        <option>
-                            <--- Chọn năm học --->
+                        <option <?php empty($_SESSION['school_year']) ? "selected" : "" ?> value="">
+                            <--- Chọn năm học--->
                         </option>
-                        <option value="1">Năm 1</option>
-                        <option value="2">Năm 2</option>
-                        <option value="3">Năm 3</option>
-                        <option value="4">Năm 4</option>
+                        <?php
+                        $school_year = constant('YEAR');
+                        foreach ($school_year as $key => $value) {
+                            $selected = ("");
+                        ?>
+                            <option <?php echo $selected; ?> value="<?php echo $key ?>"><?php echo $value ?></option>
+                            <?php
+                        }
+                        ?>
                     </select>
                     <?php if (isset($errorsMissing['school_year'])) { ?>
                         <span class="text-danger font-weight-bold">
@@ -45,13 +55,15 @@ include '../controller/schedule_add_input.php'
                 <label class="col-sm-2" for="subject">Môn học</label>
                 <div class="col-sm-6">
                     <select name="subject_id" id="subject" class="form-control">
-                        <option>
+                        <option <?php empty($_SESSION['subject_id']) ? "selected" : "" ?> value="">
                             <--- Chọn môn học --->
                         </option>
                         <?php
+                        
                         if (isset($subjects)) {
                             foreach ($subjects as $subject) {
-                                echo '<option value="' . $subject["id"] . '">' . $subject["name"] . '</option>';
+                                $selected = (isset($_SESSION['subject_id']) && $subject["id"] == $_SESSION['subject_id'] ? "selected" : "");
+                                echo '<option  ' . $selected . 'value="' . $subject["id"] . '">' . $subject["name"] .'</option>';
                             }
                         }
                         ?>
@@ -67,13 +79,14 @@ include '../controller/schedule_add_input.php'
                 <label class="col-sm-2" for="teacher">Giáo viên</label>
                 <div class="col-sm-6">
                     <select name="teacher_id" id="teacher" class="form-control">
-                        <option selected>
+                        <option <?php empty($_SESSION['teacher_id']) ? "selected" : "" ?> value="">
                             <--- Chọn giáo viên --->
                         </option>
                         <?php
                         if (isset($teachers)) {
                             foreach ($teachers as $teacher) {
-                                '<option value="' . $teacher["id"] . '">' . $teacher["name"] . '</option>';
+                                $selected = (isset( $_SESSION['teacher_id']) && $teacher["id"] == $_SESSION['teacher_id'] ? "selected" : "");
+                                echo '<option ' .$selected. 'value="' . $teacher["id"] . '">' . $teacher["name"] . '</option>';
                             }
                         }
                         ?>
@@ -91,16 +104,19 @@ include '../controller/schedule_add_input.php'
                 <div class="col-sm-6">
 
                     <select id="weekday" name="week_day" class="form-control">
-                        <option selected>
-                            <--- Chọn thứ --->
+                        <option <?php empty($_SESSION['week_day']) ? "selected" : "" ?> value="">
+                                <--- Chọn lịch học--->
                         </option>
-                        <option value="Thứ 2">Thứ 2</option>
-                        <option value="Thứ 3">Thứ 3</option>
-                        <option value="Thứ 4">Thứ 4</option>
-                        <option value="Thứ 5">Thứ 5</option>
-                        <option value="Thứ 6">Thứ 6</option>
-                        <option value="Thứ 7">Thứ 7</option>
-                        <option value="Chủ Nhật">Chủ Nhật</option>
+                        <?php
+                        $week_day = constant('WEEKDAY');
+                        foreach ($week_day as $key => $value) {
+                            $selected = ($key == $_SESSION['week_day'] ? "selected" : "");
+                        ?>
+                            <option <?php echo $selected; ?> value="<?= $key ?>"><?= $value ?></option>
+                            <?php
+                        }
+                        ?>
+                       
                     </select>
                     <?php if (isset($errorsMissing['week_day'])) { ?>
                         <span class="text-danger font-weight-bold">
@@ -117,7 +133,7 @@ include '../controller/schedule_add_input.php'
                     $lessions = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
                     foreach ($lessions as $lession) { ?>
                          <div class='form-check'>
-                            <input class='form-check-input' type='checkbox' value='<?php echo $lession; ?>' id='lession<?php echo $lession; ?>' name='lession'>
+                            <input class='form-check-input' type='checkbox' value='<?php echo $lession; ?>' id='lession<?php echo $lession; ?>' name='lession[]'>
                             <label class='form-check-label' for='lession<?php echo $lession; ?>''>
                                 Tiết <?php echo $lession; ?>
                             </label>
@@ -136,7 +152,7 @@ include '../controller/schedule_add_input.php'
             <div class="form-group row mt-4">
                 <label class="col-sm-2" for="note">Chú ý</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" id="notes" name="notes" rows="5"></textarea>
+                    <textarea class="form-control" id="notes" name="notes" rows="5"><?php echo (isset($_SESSION['notes']) ? $_SESSION['notes'] : ''); ?></textarea>
                     <?php if (isset($errorsMissing['notes'])) { ?>
                         <span class="text-danger font-weight-bold">
                             <b><?php echo $errorsMissing['notes']; ?></b>

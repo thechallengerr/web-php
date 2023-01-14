@@ -4,9 +4,29 @@ include '../common/database.php';
 include '../model/subject.php';
 include '../common/define.php';
 
+function deleteDir($dirPath) {
+    if (! is_dir($dirPath)) {
+        throw new InvalidArgumentException("$dirPath must be a directory");
+    }
+    if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
+        $dirPath .= '/';
+    }
+    $files = glob($dirPath . '*', GLOB_MARK);
+    foreach ($files as $file) {
+        if (is_dir($file)) {
+            deleteDir($file);
+        } else {
+            unlink($file);
+        }
+    }
+    rmdir($dirPath);
+}
+
 if(isset($_GET["delete_subject"])) {
     $id = $_GET["delete_subject"];
     delete_subject($id);
+    $dirname = "../../assets/avatar/subject/{$id}";
+    deleteDir($dirname);
     header('Location: ./subject_search.php');
 }
 

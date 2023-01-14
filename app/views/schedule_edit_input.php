@@ -29,7 +29,7 @@ include("../common/define.php");
 
                     <select id="school_year" class="form-control" name="school_year">
                         <option <?php empty($_SESSION['school_year']) ? "selected" : "" ?> value="">
-                            <--- Chọn năm học--->
+                            Chọn năm họ
                         </option>
                         <?php
                         $school_year = constant('YEAR');
@@ -55,7 +55,7 @@ include("../common/define.php");
 
                     <select name="subject_id" id="subject" class="form-control">
                         <option <?php empty($_SESSION['subject_id']) ? "selected" : "" ?> value="">
-                            <--- Chọn môn học --->
+                            Chọn môn học
                         </option>
 
                         <?php
@@ -82,7 +82,7 @@ include("../common/define.php");
                 <div class="col-sm-6">
                     <select name="teacher_id" id="teacher" class="form-control">
                         <option value="">
-                            <--- Chọn giáo viên --->
+                            Chọn giáo viên
                         </option>
 
                         <?php
@@ -110,7 +110,7 @@ include("../common/define.php");
 
                     <select id="school_year" class="form-control" name="week_day">
                         <option <?php empty($_SESSION['week_day']) ? "selected" : "" ?> value="">
-                            <--- Chọn Thứ--->
+                            Chọn Th
                         </option>
                         <?php
                         $weekday = constant('WEEKDAY');
