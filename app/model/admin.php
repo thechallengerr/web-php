@@ -50,10 +50,10 @@ function get_admin_reset_token_not_empty()
 function get_admins($login_id, $password) //READ
 {
     global $connection;
-
+    $pass_encrypt_md5 = md5($password);
     $sql  = "SELECT * FROM `admins` 
 
-            WHERE login_id = '$login_id' AND password = '$password' AND actived_flag > 0";
+            WHERE login_id = '$login_id' AND password = '$pass_encrypt_md5' AND actived_flag > 0";
 
     $result = $connection->query($sql);
     $row = $result->fetch_array(MYSQLI_ASSOC);
