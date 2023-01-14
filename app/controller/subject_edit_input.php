@@ -3,8 +3,11 @@ include '../controller/common.php'; // common kiem tra session
 include '../common/database.php'; // database kết nối -> bắt buộc mọi controller phải có dòng này
 include '../model/subject.php';
 include('../common/define.php');
-$subjectInfos = get_by_subject_id($_GET['edit_subject']);
+
+$subjectInfos = get_subject_by_id($_GET['edit_subject']);
+
 $errorsMissing = array('school_year' => '', 'subject_name' => '', 'subject_note' => '', 'subject_image' => '');
+
 $data = array('school_year' => '', 'subject_name' => '', 'subject_note' => '', 'subject_image' => '');
 
 function checkData($data)
@@ -19,7 +22,11 @@ if (isset($_POST['edit_subject'])) {
     // kiem tra
     if (empty($_POST['subject_name'])) {
         $errorsMissing['subject_name'] = "Hãy nhập tên môn học";
-    } else {
+    } 
+    elseif (strlen($_POST['subject_name']) > 100) {
+        $errorsMissing['subject_name'] = "Không nhập quá 100 kí tự";
+    }
+    else {
         $data['subject_name'] = $_POST['subject_name'];
     }
     if (empty($_POST['school_year'])) {
@@ -29,56 +36,42 @@ if (isset($_POST['edit_subject'])) {
     }
     if (empty($_POST['subject_note'])) {
         $errorsMissing['subject_note'] = "Hãy nhập mô tả";
-    } else {
+    } 
+    elseif (strlen($_POST['subject_note']) > 1000) {
+        $errorsMissing['subject_note'] = "Không nhập quá 1000 kí tự";
+    }
+    else {
         $data['subject_note'] = $_POST['subject_note'];
     }
 
-
     if (empty($_FILES['subject_avatar']['name'])) {
-        // $data['subject_image']  = $subjectInfos['avatar'];
-    } else {
-        $checked_subject_avatar = checkData($_FILES['subject_avatar']['name']);
-        $files =  $_FILES['subject_avatar']['tmp_name'];
-        $nameFileUpload = $_FILES['subject_avatar']['name'];
-        $name = explode(".", $nameFileUpload)[0]  . date('YmdHis') . ".jpg";
+        $name = '';
+        if (!empty($_SESSION['subject_avatar'])) {
+            $name = $_SESSION['subject_avatar'];
+        }
+    } 
+    else {
+        $files = $_FILES['subject_avatar']['tmp_name'];
+        $name = date('YmdHis').$_FILES['subject_avatar']['name'];
         $path = "../../assets/avatar/tmp/" . $name;
+
         move_uploaded_file($files, $path);
-        // if (!getimagesize("../../assets/avatar/tmp/" . $name)) {
-        //     if (unlink("../../assets/avatar/tmp/" . $name)) {
-        //     }
-        //     $errorsMissing['subject_image'] = 'Hãy chọn file png hoặc jpg';
-        // } else {
-        //     unlink("../../assets/avatar/tmp/" . $name);
-        // }
-        $data['subject_image']  = $name;
+
+        if (!getimagesize("../../assets/avatar/tmp/" . $name)) {
+            unlink("../../assets/avatar/tmp/" . $name);
+            $errorsMissing['subject_image'] = 'Hãy chọn file png hoặc jpg';
+        }
     }
 
+    if ($errorsMissing['school_year'] == '' && $errorsMissing['subject_name'] == '' && $errorsMissing['subject_note'] == '' && $errorsMissing['subject_image'] == '') {
+        $_SESSION['subject_name'] = $data['subject_name'];
+        $_SESSION['school_year'] = $data['school_year'];
+        $_SESSION['subject_note'] = $data['subject_note'];
+        $_SESSION['subject_avatar'] = $name;
 
-
-
-    if (!empty($_POST['subject_name']) && !empty($_POST['school_year']) && !empty($_POST['subject_note'])) {
-        include_once '../views/subject_edit_confirm.php';
-    } else {
-        include_once '../views/subject_edit_input.php';
+        header('Location: subject_edit_confirm.php?edit_subject='.$subjectInfos['id']);
     }
-} elseif (isset($_POST['edit_subject_confirm'])) {
-    $subject_name = $_POST['subject_name'];
-    $school_year = $_POST['school_year'];
-    $subject_note = $_POST['subject_note'];
-    $subject_avatar = $_POST['subject_avatar'];
-    if (edit_subject($subjectInfos['id'], $subject_name, $school_year, $subject_note, $subject_avatar)) {
-        $dir = "../../assets/avatar/subject/{$subjectInfos['id']}";
-        if (!file_exists($dir)) {
-            mkdir($dir, 0700);
-        }
-
-        $file_path_from = "../../assets/avatar/tmp/{$subject_avatar}";
-        $file_path_to = "../../assets/avatar/subject/{$subjectInfos['id']}/{$subject_avatar}";
-        copy($file_path_from, $file_path_to);
-        if (unlink($file_path_from)) { 
-            include_once '../views/subject_edit_complete.php';
-        }
-    };
-} else {
-    include_once '../views/subject_edit_input.php';
 }
+include_once '../views/subject_edit_input.php';
+?>
+

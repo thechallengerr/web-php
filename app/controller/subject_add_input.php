@@ -88,6 +88,9 @@ if (isset($_POST['submit_subject_add'])){
             if (unlink("../../assets/avatar/tmp/".$name)) {
 
             }
+            else{
+                header('Location:subject_add_input.php');
+            }
 
             $error['subject_avatar_empty'] = 'Hãy chọn file png hoặc jpg';
         }
@@ -96,6 +99,9 @@ if (isset($_POST['submit_subject_add'])){
             if (isset($_POST['old_subject_avatar'])){
                 if (unlink("../../assets/avatar/tmp/".$_POST['old_subject_avatar'])){
 
+                }
+                else{
+                    header('Location:subject_add_input.php');
                 }
             }
         }
@@ -106,7 +112,8 @@ if (isset($_POST['submit_subject_add'])){
         $_SESSION['school_year'] = $_POST['school_year'];
         $_SESSION['subject_note'] = $_POST['subject_note'];
         $_SESSION['subject_avatar'] = $name;
-        header('Location:../views/subject_add_confirm.php');
+
+        header('Location:subject_add_confirm.php');
     }
     else{
         include '../views/subject_add_input.php';
