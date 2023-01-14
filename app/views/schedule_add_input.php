@@ -119,8 +119,9 @@
                 <div class="col-sm-10 d-flex justify-content-between">
                     <?php
                     $lessions = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
+                    $lession_arr = (isset($_SESSION['lession'])? $_SESSION['lession'] : []);
                     foreach ($lessions as $lession) {
-                        $checked = (in_array($lession, $_SESSION['lession']) ? "checked" : "");
+                        $checked = (in_array($lession, $lession_arr) ? "checked" : "");
                         ?>
                          <div class='form-check'>
                             <input class='form-check-input' id="lession" type='checkbox' value="<?=$lession?>" name="lession[]" <?php echo $checked?>>
