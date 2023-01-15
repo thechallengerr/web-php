@@ -47,10 +47,14 @@ function add_schedule($params) //CREAT
 
     $date = date("Y-m-d H:i:s");
     $sql  = "INSERT INTO `schedules` (school_year, subject_id, teacher_id, week_day, lession, notes, created) 
-    VALUES ('{$params['school_year']}','{$params['subject_id']}','{$params['teacher_id']}','{$params['week_day']}','{$params['lession']}','{$params['notes']}','$date')";
+    VALUES ('{$params['school_year']}','{$params['subject_id']}','{$params['teacher_id']}','{$params['week_day']}','{$params['lession']}',?,'$date')";
     $result = $connection->query($sql);
 
-    return $result;
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("s", $params['notes']);
+    $stmt->execute();
+
+    return true;
 }
 
 function get_all_schedules() //READ
@@ -100,10 +104,14 @@ function edit_schedule($schedule_id, $school_year, $subject_id, $teacher_id, $we
         teacher_id = '$teacher_id',
         week_day = '$week_day',
         lession = '$lession',
-        notes = '$notes'
+        notes = ?
     WHERE id = '$schedule_id'";
 
-    $result = $connection->query($sql);
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("s", $notes);
+    $stmt->execute();
+
+return true;
     return true;
 }
 
