@@ -23,7 +23,7 @@
         .img-bg {
             margin: auto;
             max-height: 100%;
-            content: url('../../assets/img/Illustration.png');
+            content: url('assets/img/Illustration.png');
         }
 
         .right {

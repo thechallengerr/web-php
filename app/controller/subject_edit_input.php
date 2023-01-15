@@ -51,6 +51,10 @@ if (isset($_POST['edit_subject'])) {
         }
     } 
     else {
+        if (!empty($_SESSION['subject_avatar'])) {
+            unlink("../../assets/avatar/tmp/" . $_SESSION['subject_avatar']);
+        } 
+
         $files = $_FILES['subject_avatar']['tmp_name'];
         $name = date('YmdHis').$_FILES['subject_avatar']['name'];
         $path = "../../assets/avatar/tmp/" . $name;
@@ -63,12 +67,12 @@ if (isset($_POST['edit_subject'])) {
         }
     }
 
-    if ($errorsMissing['school_year'] == '' && $errorsMissing['subject_name'] == '' && $errorsMissing['subject_note'] == '' && $errorsMissing['subject_image'] == '') {
-        $_SESSION['subject_name'] = $data['subject_name'];
-        $_SESSION['school_year'] = $data['school_year'];
-        $_SESSION['subject_note'] = $data['subject_note'];
-        $_SESSION['subject_avatar'] = $name;
+    $_SESSION['subject_name'] = $data['subject_name'];
+    $_SESSION['school_year'] = $data['school_year'];
+    $_SESSION['subject_note'] = $data['subject_note'];
+    $_SESSION['subject_avatar'] = $name;
 
+    if ($errorsMissing['school_year'] == '' && $errorsMissing['subject_name'] == '' && $errorsMissing['subject_note'] == '' && $errorsMissing['subject_image'] == '') {
         header('Location: subject_edit_confirm.php?edit_subject='.$subjectInfos['id']);
     }
 }

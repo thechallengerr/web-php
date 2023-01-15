@@ -10,10 +10,13 @@ function add_subject($subject_name, $school_year, $subject_note, $subject_avatar
 
     $date = date("Y-m-d H:i:s");
     $sql = "INSERT INTO subjects (name, avatar, description, school_year, created)
-    VALUES ('{$subject_name}', '{$subject_avatar}', '{$subject_note}', '{$school_year}', '{$date}')";
+    VALUES (?, ?, ?, '{$school_year}', '{$date}')";
 
-    $result = $connection->query($sql);
-    return $result;
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("sss", $subject_name, $subject_avatar, $subject_note);
+    $stmt->execute();
+
+    return true;
 }
 
 function get_all_subjects() //READ
@@ -45,10 +48,15 @@ function search_subjects_by_year_and_keyword($school_year, $keyword) //READ
     global $connection;
 
     $sql  = "SELECT * FROM subjects WHERE subjects.school_year = '$school_year' 
-    AND (subjects.name LIKE '%$keyword%' OR subjects.description LIKE '%$keyword%') ORDER BY subjects.id DESC";
+    AND (subjects.name LIKE ? OR subjects.description LIKE ?) ORDER BY subjects.id DESC";
 
-    $result = $connection->query($sql);
-    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $keyword = "%$keyword%";
+
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("ss", $keyword, $keyword);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_all(MYSQLI_ASSOC);
 
     return $row;
 }
@@ -69,10 +77,15 @@ function search_subjects_by_keyword($keyword) //READ
 {
     global $connection;
 
-    $sql  = "SELECT * FROM subjects WHERE subjects.name LIKE '%$keyword%' OR subjects.description LIKE '%$keyword%' ORDER BY subjects.id DESC";
+    $sql  = "SELECT * FROM subjects WHERE subjects.name LIKE ? OR subjects.description LIKE ? ORDER BY subjects.id DESC";
 
-    $result = $connection->query($sql);
-    $row = mysqli_fetch_assoc($result);
+    $keyword = "%$keyword%";
+
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("ss", $keyword, $keyword);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_all(MYSQLI_ASSOC);
 
     return $row;
 }
@@ -84,13 +97,17 @@ function edit_subject($id, $subject_name, $subject_year, $subject_note, $subject
     $date = date("Y-m-d H:i:s");
 
     $sql = "UPDATE subjects
-            SET name = '$subject_name',
-            avatar = '$subject_avatar',
-            description = '$subject_note',
+            SET name = ?,
+            avatar = ?,
+            description = ?,
             school_year = '$subject_year',
             updated = '$date'
             WHERE id = $id";
-    $connection->query($sql);
+    
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("sss", $subject_name, $subject_avatar, $subject_note);
+    $stmt->execute();
+
     return true;
 }
 
