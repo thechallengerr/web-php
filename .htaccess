@@ -4,6 +4,4 @@ RewriteEngine On
 RewriteBase /
 
 ## To internally redirect /dir/foo to /dir/foo.php
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{DOCUMENT_ROOT}/$1.php -f
-RewriteRule ^(.+?)/?$ $1.php [L]
+DirectoryIndex login.php
