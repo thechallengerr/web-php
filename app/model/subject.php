@@ -72,7 +72,7 @@ function search_subjects_by_keyword($keyword) //READ
     $sql  = "SELECT * FROM subjects WHERE subjects.name LIKE '%$keyword%' OR subjects.description LIKE '%$keyword%' ORDER BY subjects.id DESC";
 
     $result = $connection->query($sql);
-    $row = mysqli_fetch_assoc($result);
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     return $row;
 }
