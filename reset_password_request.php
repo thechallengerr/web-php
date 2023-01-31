@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
     }
     if (empty($errors['exist']) && empty($errors['strlen']) && empty($errors['login_id'])) {
         if(update_microtime_request_password($login_id)) {
-            header("location: app/controller/homepage.php");
+            header("location: login.php");
         }else{
            $errors['login_id'] = "Lỗi"; 
         }

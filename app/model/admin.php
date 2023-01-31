@@ -14,25 +14,36 @@ function check_admin_login_id($login_id)
     global $connection;
 
     $sql  = "SELECT * FROM `admins` 
+            WHERE login_id = ?";
 
-            WHERE login_id = '$login_id'";
-    $result = $connection->query($sql);
-    if ($result->num_rows !== 0) {
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("s", $login_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_all(MYSQLI_ASSOC);
+
+    if (count($row) != 0) {
         return true;
-    } else {
+    }
+    else {
         return false;
     }
 }
 
 function update_microtime_request_password($login_id)
 {
-
     global $connection;
+
     $get_mictime = microtime(true);
+
     $sql = "UPDATE `admins`
             SET reset_password_token = '$get_mictime'
-            WHERE login_id = '$login_id'";
-    $connection->query($sql);
+            WHERE login_id = ?";
+
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("s", $login_id);
+    $stmt->execute();
+
     return true;
 }
 
@@ -52,11 +63,16 @@ function get_admins($login_id, $password) //READ
     global $connection;
     $pass_encrypt_md5 = md5($password);
     $sql  = "SELECT * FROM `admins` 
+            WHERE login_id = ? AND password = '$pass_encrypt_md5' AND actived_flag > 0";
 
-            WHERE login_id = '$login_id' AND password = '$pass_encrypt_md5' AND actived_flag > 0";
+    // $result = $connection->query($sql);
+    // $row = $result->fetch_array(MYSQLI_ASSOC);
 
-    $result = $connection->query($sql);
-    $row = $result->fetch_array(MYSQLI_ASSOC);
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("s", $login_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_all(MYSQLI_ASSOC);
 
     return $row;
 }
